@@ -30,6 +30,7 @@
     tombi
     go
     gopls
+    claude-code
   ];
 
   home.stateVersion = "25.05";

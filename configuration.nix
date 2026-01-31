@@ -17,6 +17,11 @@
     git
   ];
 
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (pkgs.lib.getName pkg) [
+      "claude-code"
+    ];
+
   wsl.enable = true;
   wsl.defaultUser = "nixos";
 

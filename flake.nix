@@ -1,15 +1,15 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-wsl.url = "github:nix-community/nixos-wsl/main";
-    nix-ld.url = "github:Mic92/nix-ld";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl.url = "github:nix-community/nixos-wsl/main";
+    nix-ld.url = "github:Mic92/nix-ld";
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, nix-ld, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixos-wsl, nix-ld, home-manager, ... }: {
     # The host with the hostname `nixos` will use this configuration
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
