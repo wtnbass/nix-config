@@ -13,6 +13,7 @@
   environment.systemPackages = with pkgs;[
     curl
     wget
+    gnumake
     vim
     git
   ];
