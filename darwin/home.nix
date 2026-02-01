@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
   # Ghostty configuration
   xdg.configFile."ghostty/config".source = ./ghostty_config;

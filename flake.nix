@@ -18,7 +18,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nixos-wsl,
       nix-ld,
@@ -35,6 +34,7 @@
       nixosConfigurations = {
         ${user.hostname} = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = { inherit user; };
           modules = [
             ./configuration.nix
             nixos-wsl.nixosModules.default
@@ -66,6 +66,7 @@
       darwinConfigurations = {
         ${user.hostname} = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
+          specialArgs = { inherit user; };
           modules = [
             ./darwin/configuration.nix
             {

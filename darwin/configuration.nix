@@ -1,8 +1,5 @@
-{ config, pkgs, ... }:
+{ pkgs, user, ... }:
 
-let
-  user = import ../user.nix;
-in
 {
   # Disable nix-darwin's Nix management (using Determinate Nix)
   nix.enable = false;

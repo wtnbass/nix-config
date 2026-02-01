@@ -4,22 +4,16 @@ UNAME := $(shell uname)
 
 .DEFAULT_GOAL := switch
 
-pre-switch:
+user.nix:
 	@./setup-user.sh
 	@git add user.nix
 
-post-switch:
-	@-git rm -f --cached user.nix 2>/dev/null || true
-	@rm -f user.nix
-
-clean: post-switch
-
 ifeq ($(UNAME), Darwin)
-switch: pre-switch
+switch: user.nix
 	@trap 'git rm -f --cached user.nix 2>/dev/null; rm -f user.nix' EXIT; \
 	sudo darwin-rebuild switch --flake .
 else
-switch: pre-switch
+switch: user.nix
 	@trap 'git rm -f --cached user.nix 2>/dev/null; rm -f user.nix' EXIT; \
 	sudo nixos-rebuild switch --flake .
 endif

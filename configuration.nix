@@ -6,15 +6,11 @@
 # https://github.com/nix-community/NixOS-WSL
 
 {
-  config,
-  lib,
   pkgs,
+  user,
   ...
 }:
 
-let
-  user = import ./user.nix;
-in
 {
   nix.settings.experimental-features = [
     "nix-command"

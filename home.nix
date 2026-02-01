@@ -1,7 +1,6 @@
 {
-  config,
   pkgs,
-  user ? null,
+  user,
   ...
 }:
 
