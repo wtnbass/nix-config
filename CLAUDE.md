@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Apply configuration changes (auto-detects Darwin/NixOS)
-make switch
+make
 ```
 
 - macOS: `darwin-rebuild switch --flake .`

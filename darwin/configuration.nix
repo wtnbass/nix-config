@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  user = import ./user.nix;
+  user = import ../user.nix;
 in
 {
   # Disable nix-darwin's Nix management (using Determinate Nix)
@@ -21,6 +21,28 @@ in
   environment.systemPackages = with pkgs; [
     vim
   ];
+
+  # Homebrew management via nix-darwin
+  homebrew = {
+    enable = true;
+
+    # Uninstall packages not listed here
+    onActivation = {
+      cleanup = "zap";
+      autoUpdate = true;
+      upgrade = true;
+    };
+
+    casks = [
+      "azookey"
+      "ghostty"
+      "karabiner-elements"
+      "raycast"
+      "visual-studio-code"
+      "zed"
+    ];
+
+  };
 
   # Enable Touch ID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
