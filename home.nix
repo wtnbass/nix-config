@@ -8,7 +8,11 @@
   home.packages = with pkgs;[
     nixd
     helix
+    neovim
+    emacs
     tmux
+    ffmpeg
+    yt-dlp
     carapace
     ripgrep
     bat
@@ -53,14 +57,33 @@
     };
   };
 
+  programs.zsh = {
+    enable = true;
+
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      ls = "eza -h --git --icons";
+      ll = "ls -l";
+      la = "ls -a";
+      lla = "ls -la";
+      t = "tmux";
+    };
+
+    sessionVariables = {
+      EDITOR = "hx";
+    };
+  };
+
   programs.carapace = {
     enable = true;
     enableBashIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.starship = {
     enable = true;
-    # enableBashIntegraton = true;
   };
 
   programs.git = {
@@ -104,10 +127,15 @@
     };
   };
 
+  xdg.configFile."helix/themes/kanagawa_transparent.toml".text = ''
+  inherits = "kanagawa"
+  "ui.background" = {}
+  '';
+
   programs.helix = {
     enable = true;
     settings = {
-      theme = "kanagawa";
+      theme = "kanagawa_transparent";
       editor = {
         line-number = "relative";
         cursorline = true;
