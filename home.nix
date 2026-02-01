@@ -84,7 +84,7 @@
       user.name = "wtnbass";
       user.email = "wtnbass@icloud.com";
       "credential \"https://github.com\"".helper = "!gh auth git-credential";
-      core.editor = "helix";
+      core.editor = "hx";
       diff.external = "difft";
       merge.ff = "false";
       pull.ff = "only";
