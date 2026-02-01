@@ -7,32 +7,59 @@
     };
     nixos-wsl.url = "github:nix-community/nixos-wsl/main";
     nix-ld.url = "github:Mic92/nix-ld";
-  };
-
-  outputs = { self, nixpkgs, nixos-wsl, nix-ld, home-manager, ... }: {
-    # The host with the hostname `nixos` will use this configuration
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
-          nixos-wsl.nixosModules.default
-          {
-            system.stateVersion = "25.05";
-            wsl.enable = true;
-          }
-
-          nix-ld.nixosModules.nix-ld
-          { programs.nix-ld.dev.enable = true; }
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.nixos = import ./home.nix;
-          }
-        ];
-      };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs = { self, nixpkgs, nixos-wsl, nix-ld, home-manager, nix-darwin, ... }:
+    let
+      user = import ./user.nix;
+    in
+    {
+      # NixOS-WSL configuration
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./configuration.nix
+            nixos-wsl.nixosModules.default
+            {
+              system.stateVersion = "25.05";
+              wsl.enable = true;
+            }
+
+            nix-ld.nixosModules.nix-ld
+            { programs.nix-ld.dev.enable = true; }
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.nixos = import ./home.nix;
+            }
+          ];
+        };
+      };
+
+      # macOS (nix-darwin) configuration
+      darwinConfigurations = {
+        ${user.hostname} = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./darwin.nix
+
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.extraSpecialArgs = { inherit user; };
+              home-manager.users.${user.username} = import ./home.nix;
+            }
+          ];
+        };
+      };
+    };
 }

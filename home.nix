@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, user ? null, ... }:
 
 {
-  # home.username = "nixos";
-  # home.homeDirectory = "/home/nixos";
+  home.username = if user != null then user.username else "nixos";
+  home.homeDirectory =
+    if user != null then "/Users/${user.username}" else "/home/nixos";
 
   home.packages = with pkgs;[
     nixd
@@ -106,6 +107,7 @@
   programs.helix = {
     enable = true;
     settings = {
+      theme = "kanagawa";
       editor = {
         line-number = "relative";
         cursorline = true;
