@@ -9,5 +9,6 @@ cat > user.nix << EOF
 {
   username = "${USERNAME}";
   hostname = "${HOSTNAME}";
+  home = "${HOME}";
 }
 EOF

@@ -16,14 +16,24 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, nix-ld, home-manager, nix-darwin, llm-agents, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixos-wsl,
+      nix-ld,
+      home-manager,
+      nix-darwin,
+      llm-agents,
+      ...
+    }:
     let
       user = import ./user.nix;
     in
     {
       # NixOS-WSL configuration
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        ${user.hostname} = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./configuration.nix
@@ -45,7 +55,8 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.nixos = import ./home.nix;
+              home-manager.extraSpecialArgs = { inherit user; };
+              home-manager.users.${user.username} = import ./home.nix;
             }
           ];
         };

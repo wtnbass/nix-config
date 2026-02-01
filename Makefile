@@ -19,6 +19,7 @@ switch: pre-switch
 	@trap 'git rm -f --cached user.nix 2>/dev/null; rm -f user.nix' EXIT; \
 	sudo darwin-rebuild switch --flake .
 else
-switch:
+switch: pre-switch
+	@trap 'git rm -f --cached user.nix 2>/dev/null; rm -f user.nix' EXIT; \
 	sudo nixos-rebuild switch --flake .
 endif

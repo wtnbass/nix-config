@@ -11,7 +11,7 @@ in
 
   users.users.${user.username} = {
     name = user.username;
-    home = "/Users/${user.username}";
+    home = user.home;
   };
 
   # Allow unfree packages

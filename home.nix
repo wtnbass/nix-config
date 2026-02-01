@@ -1,12 +1,17 @@
-{ config, pkgs, user ? null, ... }:
+{
+  config,
+  pkgs,
+  user ? null,
+  ...
+}:
 
 {
-  home.username = if user != null then user.username else "nixos";
-  home.homeDirectory =
-    if user != null then "/Users/${user.username}" else "/home/nixos";
+  home.username = user.username;
+  home.homeDirectory = user.home;
 
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     nixd
+    nixfmt
     helix
     neovim
     emacs
@@ -42,22 +47,6 @@
 
   home.stateVersion = "25.05";
   programs.home-manager.enable = true;
-
-  programs.bash = {
-    enable = true;
-
-    shellAliases = {
-      ls = "eza -h --git --icons";
-      ll = "ls -l";
-      la = "ls -a";
-      lla = "ls -la";
-      t = "tmux";
-    };
-
-    sessionVariables = {
-      EDITOR = "hx";
-    };
-  };
 
   programs.zsh = {
     enable = true;
@@ -130,8 +119,8 @@
   };
 
   xdg.configFile."helix/themes/kanagawa_transparent.toml".text = ''
-  inherits = "kanagawa"
-  "ui.background" = {}
+    inherits = "kanagawa"
+    "ui.background" = {}
   '';
 
   programs.helix = {
@@ -152,7 +141,17 @@
         };
       };
       keys.normal = {
-        space = { space = ":reload-all"; };
+        space = {
+          space = ":reload-all";
+        };
+      };
+      keys.insert = {
+        "C-f" = "move_char_right";
+        "C-b" = "move_char_left";
+        "C-p" = "move_line_up";
+        "C-n" = "move_line_down";
+        "C-a" = "goto_line_start";
+        "C-e" = "goto_line_end";
       };
     };
   };
@@ -168,7 +167,7 @@
     extraConfig = ''
       bind r source-file ~/.tmux.conf \; display "Reloaded!"
       bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e'"
-      
+
       bind x kill-pane
       bind X kill-window
 

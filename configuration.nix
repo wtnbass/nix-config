@@ -5,23 +5,36 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, ... }:
-
 {
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-  environment.systemPackages = with pkgs;[
+let
+  user = import ./user.nix;
+in
+{
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  users.users.${user.username} = {
+    name = user.username;
+    home = user.home;
+    shell = pkgs.zsh;
+  };
+  programs.zsh.enable = true;
+
+  environment.systemPackages = with pkgs; [
     curl
     wget
     gnumake
     vim
     git
   ];
-
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (pkgs.lib.getName pkg) [
-      "claude-code"
-    ];
 
   wsl.enable = true;
   wsl.defaultUser = "nixos";
