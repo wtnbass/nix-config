@@ -23,6 +23,7 @@
     fd
     eza
     fzf
+    zoxide
     jq
     jujutsu
     difftastic
@@ -66,9 +67,14 @@
     };
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = ["--cmd cd"];
+  };
+
   programs.carapace = {
     enable = true;
-    enableBashIntegration = true;
     enableZshIntegration = true;
   };
 
