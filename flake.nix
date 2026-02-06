@@ -6,7 +6,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl.url = "github:nix-community/nixos-wsl/main";
-    nix-ld.url = "github:Mic92/nix-ld";
     nix-darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +19,6 @@
     {
       nixpkgs,
       nixos-wsl,
-      nix-ld,
       home-manager,
       nix-darwin,
       llm-agents,
@@ -42,9 +40,6 @@
               system.stateVersion = "25.05";
               wsl.enable = true;
             }
-
-            nix-ld.nixosModules.nix-ld
-            { programs.nix-ld.dev.enable = true; }
 
             {
               nixpkgs.overlays = [
