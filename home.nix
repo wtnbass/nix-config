@@ -78,6 +78,12 @@
     enableZshIntegration = true;
   };
 
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   programs.starship = {
     enable = true;
   };
@@ -164,13 +170,12 @@
   programs.tmux = {
     enable = true;
 
-    prefix = "F1";
+    prefix = "C-q";
     mouse = true;
     escapeTime = 0;
     historyLimit = 5000;
 
     extraConfig = ''
-      bind r source-file ~/.tmux.conf \; display "Reloaded!"
       bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e'"
 
       bind x kill-pane
@@ -180,10 +185,10 @@
       bind = split-window -h
       bind - split-window -v
 
-      bind -n M-Left select-pane -L
-      bind -n M-Down select-pane -D
-      bind -n M-Up select-pane -U
-      bind -n M-Right select-pane -R
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
 
       bind -n S-Left resize-pane -L 2
       bind -n S-Down resize-pane -D 2
