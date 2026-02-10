@@ -31,6 +31,9 @@
     gitui
     lazygit
     yazi
+    python3
+    uv
+    ruff
     nodejs
     bun
     pnpm
