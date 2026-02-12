@@ -30,6 +30,7 @@
     gh
     gitui
     lazygit
+    ghq
     yazi
     python3
     uv
@@ -68,6 +69,23 @@
     sessionVariables = {
       EDITOR = "hx";
     };
+
+    envExtra = ''
+      export PATH="$PATH:$HOME/.bun/bin"
+    '';
+
+    initContent = ''
+function ghq-fzf() {
+  local src=$(ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+  if [ -n "$src" ]; then
+    BUFFER="cd $(ghq root)/$src"
+    zle accept-line
+  fi
+  zle -R -c
+}
+zle -N ghq-fzf
+bindkey '^g' ghq-fzf  
+    '';
   };
 
   programs.zoxide = {
@@ -238,6 +256,7 @@
       diff.external = "difft";
       merge.ff = "false";
       pull.ff = "only";
+      ghq.root = "~/code";
 
       # Ref: https://blog.gitbutler.com/how-git-core-devs-configure-git
       # clearly makes git better
@@ -261,7 +280,7 @@
       commit.verbose = "true";
       rerere.enabled = "true";
       rerere.autoupdate = "true";
-      # core.excludesfile = ""~/.gitignore"";
+      core.excludesfile = "~/.gitignore";
       rebase.autoSquash = "true";
       rebase.autoStash = "true";
       rebase.updateRefs = "true";
