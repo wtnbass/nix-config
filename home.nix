@@ -46,6 +46,7 @@
     gopls
     llm-agents.claude-code
     llm-agents.codex
+    gogcli
   ];
 
   home.stateVersion = "25.05";

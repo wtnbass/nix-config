@@ -26,6 +26,9 @@
     }:
     let
       user = import ./user.nix;
+      customOverlay = final: prev: {
+        gogcli = final.callPackage ./pkgs/gogcli.nix { };
+      };
     in
     {
       # NixOS-WSL configuration
@@ -44,6 +47,7 @@
             {
               nixpkgs.overlays = [
                 llm-agents.overlays.default
+                customOverlay
               ];
             }
             home-manager.nixosModules.home-manager
@@ -67,6 +71,7 @@
             {
               nixpkgs.overlays = [
                 llm-agents.overlays.default
+                customOverlay
               ];
             }
             home-manager.darwinModules.home-manager
