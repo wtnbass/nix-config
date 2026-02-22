@@ -44,6 +44,14 @@
     tombi
     go
     gopls
+    (fenix.complete.withComponents [
+      "cargo"
+      "clippy"
+      "rust-src"
+      "rustc"
+      "rustfmt"
+    ])
+    rust-analyzer-nightly
     llm-agents.claude-code
     llm-agents.codex
     gogcli

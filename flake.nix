@@ -10,6 +10,10 @@
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
@@ -21,6 +25,7 @@
       nixos-wsl,
       home-manager,
       nix-darwin,
+      fenix,
       llm-agents,
       ...
     }:
@@ -46,6 +51,7 @@
 
             {
               nixpkgs.overlays = [
+                fenix.overlays.default
                 llm-agents.overlays.default
                 customOverlay
               ];
@@ -70,6 +76,7 @@
             ./darwin/configuration.nix
             {
               nixpkgs.overlays = [
+                fenix.overlays.default
                 llm-agents.overlays.default
                 customOverlay
               ];
