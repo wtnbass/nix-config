@@ -1,6 +1,6 @@
 UNAME := $(shell uname)
 
-.PHONY: switch pre-switch post-switch clean
+.PHONY: switch pre-switch post-switch clean update
 
 .DEFAULT_GOAL := switch
 
@@ -17,3 +17,6 @@ switch: user.nix
 	@trap 'git rm -f --cached user.nix 2>/dev/null; rm -f user.nix' EXIT; \
 	sudo nixos-rebuild switch --flake .
 endif
+
+update:
+	nix flake update
