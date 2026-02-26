@@ -80,6 +80,7 @@
 
     envExtra = ''
       export PATH="$PATH:$HOME/.bun/bin"
+      [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
     '';
   };
 
