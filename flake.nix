@@ -14,9 +14,8 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    llm-agents = {
-      url = "github:numtide/llm-agents.nix";
-    };
+    claude-code-nix.url = "github:sadjow/claude-code-nix";
+    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
   };
 
   outputs =
@@ -26,7 +25,8 @@
       home-manager,
       nix-darwin,
       fenix,
-      llm-agents,
+      claude-code-nix,
+      codex-cli-nix,
       ...
     }:
     let
@@ -52,7 +52,6 @@
             {
               nixpkgs.overlays = [
                 fenix.overlays.default
-                llm-agents.overlays.default
                 customOverlay
               ];
             }
@@ -60,7 +59,11 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit user; };
+              home-manager.extraSpecialArgs = {
+                inherit user;
+                claude-code = claude-code-nix.packages.x86_64-linux.default;
+                codex = codex-cli-nix.packages.x86_64-linux.default;
+              };
               home-manager.users.${user.username} = import ./home.nix;
             }
           ];
@@ -77,7 +80,6 @@
             {
               nixpkgs.overlays = [
                 fenix.overlays.default
-                llm-agents.overlays.default
                 customOverlay
               ];
             }
@@ -86,7 +88,11 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
-              home-manager.extraSpecialArgs = { inherit user; };
+              home-manager.extraSpecialArgs = {
+                inherit user;
+                claude-code = claude-code-nix.packages.aarch64-darwin.default;
+                codex = codex-cli-nix.packages.aarch64-darwin.default;
+              };
               home-manager.users.${user.username} = {
                 imports = [
                   ./home.nix

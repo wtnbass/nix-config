@@ -1,6 +1,8 @@
 {
   pkgs,
   user,
+  claude-code,
+  codex,
   ...
 }:
 
@@ -52,8 +54,8 @@
       "rustfmt"
     ])
     rust-analyzer-nightly
-    llm-agents.claude-code
-    llm-agents.codex
+    claude-code
+    codex
     gogcli
   ];
 
@@ -302,6 +304,12 @@
         file-picker = {
           hidden = false;
           git-ignore = true;
+        };
+        soft-wrap = {
+          enable = true;
+          max-wrap = 25;
+          max-indent-retain = 0;
+          wrap-indicator = "";
         };
       };
       keys.normal = {
