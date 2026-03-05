@@ -1,6 +1,6 @@
 UNAME := $(shell uname)
 
-.PHONY: switch pre-switch post-switch clean update
+.PHONY: switch pre-switch post-switch clean update clean
 
 .DEFAULT_GOAL := switch
 
@@ -20,3 +20,5 @@ endif
 
 update:
 	nix flake update
+clean:
+	nix-collect-garbage
