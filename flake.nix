@@ -16,6 +16,7 @@
     };
     claude-code-nix.url = "github:sadjow/claude-code-nix";
     codex-cli-nix.url = "github:sadjow/codex-cli-nix";
+    gws.url = "github:googleworkspace/cli";
   };
 
   outputs =
@@ -27,6 +28,7 @@
       fenix,
       claude-code-nix,
       codex-cli-nix,
+      gws,
       ...
     }:
     let
@@ -63,6 +65,7 @@
                 inherit user;
                 claude-code = claude-code-nix.packages.x86_64-linux.default;
                 codex = codex-cli-nix.packages.x86_64-linux.default;
+                gws = gws.packages.x86_64-linux.default;
               };
               home-manager.users.${user.username} = import ./home.nix;
             }
@@ -92,6 +95,7 @@
                 inherit user;
                 claude-code = claude-code-nix.packages.aarch64-darwin.default;
                 codex = codex-cli-nix.packages.aarch64-darwin.default;
+                gws = gws.packages.aarch64-darwin.default;
               };
               home-manager.users.${user.username} = {
                 imports = [

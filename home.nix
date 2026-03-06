@@ -3,6 +3,7 @@
   user,
   claude-code,
   codex,
+  gws,
   ...
 }:
 
@@ -56,6 +57,7 @@
     rust-analyzer-nightly
     claude-code
     codex
+    gws
     gogcli
   ];
 
