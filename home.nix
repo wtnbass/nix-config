@@ -58,7 +58,6 @@
     claude-code
     codex
     gws
-    gogcli
   ];
 
   home.stateVersion = "25.05";

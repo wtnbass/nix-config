@@ -34,7 +34,6 @@
     let
       user = import ./user.nix;
       customOverlay = final: prev: {
-        gogcli = final.callPackage ./pkgs/gogcli.nix { };
       };
     in
     {
