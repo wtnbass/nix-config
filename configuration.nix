@@ -20,9 +20,9 @@
   users.users.${user.username} = {
     name = user.username;
     home = user.home;
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
 
   environment.systemPackages = with pkgs; [
     curl
@@ -34,6 +34,7 @@
 
   wsl.enable = true;
   wsl.defaultUser = "nixos";
+  wsl.wslConf.interop.appendWindowsPath = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
