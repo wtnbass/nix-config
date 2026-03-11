@@ -9,7 +9,9 @@
   users.users.${user.username} = {
     name = user.username;
     home = user.home;
+    shell = pkgs.fish;
   };
+  programs.fish.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -18,6 +20,7 @@
   environment.systemPackages = with pkgs; [
     vim
   ];
+  environment.shells = [ pkgs.fish ];
 
   # Homebrew management via nix-darwin
   homebrew = {
