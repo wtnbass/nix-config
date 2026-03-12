@@ -33,7 +33,15 @@
     }:
     let
       user = import ./user.nix;
-      customOverlay = final: prev: {
+      overlays = [
+        fenix.overlays.default
+        (final: prev: { })
+      ];
+      mkExtraSpecialArgs = system: {
+        inherit user;
+        claude-code = claude-code-nix.packages.${system}.default;
+        codex = codex-cli-nix.packages.${system}.default;
+        gws = gws.packages.${system}.default;
       };
     in
     {
@@ -50,22 +58,12 @@
               wsl.enable = true;
             }
 
-            {
-              nixpkgs.overlays = [
-                fenix.overlays.default
-                customOverlay
-              ];
-            }
+            { nixpkgs.overlays = overlays; }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit user;
-                claude-code = claude-code-nix.packages.x86_64-linux.default;
-                codex = codex-cli-nix.packages.x86_64-linux.default;
-                gws = gws.packages.x86_64-linux.default;
-              };
+              home-manager.extraSpecialArgs = mkExtraSpecialArgs "x86_64-linux";
               home-manager.users.${user.username} = import ./home.nix;
             }
           ];
@@ -79,23 +77,13 @@
           specialArgs = { inherit user; };
           modules = [
             ./darwin/configuration.nix
-            {
-              nixpkgs.overlays = [
-                fenix.overlays.default
-                customOverlay
-              ];
-            }
+            { nixpkgs.overlays = overlays; }
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
-              home-manager.extraSpecialArgs = {
-                inherit user;
-                claude-code = claude-code-nix.packages.aarch64-darwin.default;
-                codex = codex-cli-nix.packages.aarch64-darwin.default;
-                gws = gws.packages.aarch64-darwin.default;
-              };
+              home-manager.extraSpecialArgs = mkExtraSpecialArgs "aarch64-darwin";
               home-manager.users.${user.username} = {
                 imports = [
                   ./home.nix
