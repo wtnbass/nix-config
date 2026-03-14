@@ -114,13 +114,13 @@
 
   programs.zoxide = {
     enable = true;
-    enableZshIntegration = true;
+    enableFishIntegration = true;
     options = ["--cmd cd"];
   };
 
   programs.direnv = {
     enable = true;
-    enableZshIntegration = true;
+    enableFishIntegration = true;
     nix-direnv.enable = true;
   };
 

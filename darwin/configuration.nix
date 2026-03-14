@@ -36,7 +36,7 @@
     casks = [
       "azookey"
       "ghostty"
-      "karabiner-elements"
+      "cmux"
       "raycast"
       "visual-studio-code"
       "zed"
