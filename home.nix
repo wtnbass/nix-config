@@ -77,6 +77,13 @@
       set -g hydro_color_error red
       set -g hydro_color_prompt cyan
       set -g hydro_color_duration yellow
+
+      # Ref: https://learn.microsoft.com/ja-jp/windows/terminal/tutorials/new-tab-same-directory#fish
+      function storePathForWindowsTerminal --on-variable PWD
+          if test -n "$WT_SESSION"
+            printf "\e]9;9;%s\e\\" (wslpath -w "$PWD")
+          end
+      end
     '';
     shellAliases = {
       ls = "eza -h --git --icons";
