@@ -10,10 +10,6 @@
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     claude-code-nix.url = "github:sadjow/claude-code-nix";
     codex-cli-nix.url = "github:sadjow/codex-cli-nix";
     gws.url = "github:googleworkspace/cli";
@@ -25,7 +21,6 @@
       nixos-wsl,
       home-manager,
       nix-darwin,
-      fenix,
       claude-code-nix,
       codex-cli-nix,
       gws,
@@ -33,10 +28,7 @@
     }:
     let
       user = import ./user.nix;
-      overlays = [
-        fenix.overlays.default
-        (final: prev: { })
-      ];
+      overlays = [ ];
       mkExtraSpecialArgs = system: {
         inherit user;
         claude-code = claude-code-nix.packages.${system}.default;
@@ -67,6 +59,17 @@
               home-manager.users.${user.username} = import ./home.nix;
             }
           ];
+        };
+      };
+
+      templates = {
+        go = {
+          path = ./templates/go;
+          description = "Go development environment";
+        };
+        rust = {
+          path = ./templates/rust;
+          description = "Rust development environment";
         };
       };
 

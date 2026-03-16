@@ -45,16 +45,6 @@
     markdown-oxide
     nodePackages.yaml-language-server
     tombi
-    go
-    gopls
-    (fenix.complete.withComponents [
-      "cargo"
-      "clippy"
-      "rust-src"
-      "rustc"
-      "rustfmt"
-    ])
-    rust-analyzer-nightly
     claude-code
     codex
     gws
