@@ -89,6 +89,7 @@
       gp = "git push";
       gpl = "git pull";
       gsw = "git switch";
+      lg = "lazygit";
 
       t = "tmux";
       ta = "tmux attach";
