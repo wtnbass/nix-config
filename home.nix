@@ -29,16 +29,17 @@
     gh
     lazygit
     yazi
+    moonbit-bin.moonbit.latest
     python3
     uv
     ruff
     nodejs
     bun
     pnpm
-    nodePackages.vscode-langservers-extracted
-    nodePackages.typescript-language-server
+    vscode-langservers-extracted
+    typescript-language-server
     markdown-oxide
-    nodePackages.yaml-language-server
+    yaml-language-server
     tombi
     claude-code
     codex

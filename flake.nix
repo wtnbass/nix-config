@@ -10,6 +10,7 @@
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    moonbit-overlay.url = "github:moonbit-community/moonbit-overlay";
     claude-code-nix.url = "github:sadjow/claude-code-nix";
     codex-cli-nix.url = "github:sadjow/codex-cli-nix";
     gws.url = "github:googleworkspace/cli";
@@ -21,6 +22,7 @@
       nixos-wsl,
       home-manager,
       nix-darwin,
+      moonbit-overlay,
       claude-code-nix,
       codex-cli-nix,
       gws,
@@ -28,7 +30,9 @@
     }:
     let
       user = import ./user.nix;
-      overlays = [ ];
+      overlays = [
+        moonbit-overlay.overlays.default
+      ];
       mkExtraSpecialArgs = system: {
         inherit user;
         claude-code = claude-code-nix.packages.${system}.default;
