@@ -29,7 +29,6 @@
     gh
     lazygit
     yazi
-    moonbit-bin.moonbit.latest
     python3
     uv
     ruff
