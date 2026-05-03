@@ -43,6 +43,7 @@
     claude-code
     codex
     agenix-pkg
+    age
   ];
 
   home.stateVersion = "25.05";
