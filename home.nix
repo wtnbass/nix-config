@@ -93,6 +93,7 @@
       c = "claude";
 
       g = "gcd";
+      ghw = "cd (ghq root)/github.com/wtnbass";
     };
     plugins = [
       { name = "fzf-fish";    src = pkgs.fishPlugins.fzf-fish.src; }
