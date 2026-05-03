@@ -74,6 +74,7 @@
                 imports = [
                   agenix.homeManagerModules.default
                   ./home.nix
+                  ./wsl/home.nix
                 ];
               };
             }

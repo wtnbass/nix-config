@@ -44,6 +44,9 @@
     codex
     agenix-pkg
     age
+    docker-client
+    docker-compose
+    docker-compose-language-service
   ];
 
   home.stateVersion = "25.05";
