@@ -3,7 +3,7 @@
   user,
   claude-code,
   codex,
-  gws,
+  agenix-pkg,
   ...
 }:
 
@@ -15,14 +15,14 @@
     nixd
     nixfmt
     helix
-    neovim
+    mise
     ffmpeg
-    yt-dlp
     ripgrep
     bat
     fd
     eza
     fzf
+    ghq
     zoxide
     jq
     difftastic
@@ -42,7 +42,7 @@
     tombi
     claude-code
     codex
-    gws
+    agenix-pkg
   ];
 
   home.stateVersion = "25.05";
@@ -124,7 +124,6 @@
     settings = {
       user.name = "wtnbass";
       user.email = "wtnbass@icloud.com";
-      "credential \"https://github.com\"".helper = "!gh auth git-credential";
       core.editor = "hx";
       diff.external = "difft";
       merge.ff = "false";
@@ -156,7 +155,29 @@
       rebase.autoSquash = "true";
       rebase.autoStash = "true";
       rebase.updateRefs = "true";
+
+      "url \"git@github-work:EARTHBRAIN/\"".insteadOf = [
+        "git@github.com:EARTHBRAIN/"
+        "https://github.com/EARTHBRAIN/"
+      ];
     };
+
+    includes = [
+      {
+        condition = "gitdir:~/ghq/github.com/EARTHBRAIN/";
+        contents = {
+          user.name = "bacwatanabe";
+          user.email = "k-watanabe@bac.jp";
+        };
+      }
+      {
+        condition = "gitdir:~/ghq/proj.osaka.bac.co.jp/";
+        contents = {
+          user.name = "watanabe";
+          user.email = "k-watanabe@bac.jp";
+        };
+      }
+    ];
   };
 
   xdg.configFile."helix/themes/kanagawa_transparent.toml".text = ''
@@ -191,6 +212,36 @@
         space = {
           space = ":reload-all";
         };
+      };
+    };
+  };
+
+  age = {
+    identityPaths = [ "${user.home}/.ssh/id_ed25519" ];
+    secrets.ssh_github_personal = {
+      file = ./secrets/ssh_github_personal.age;
+      path = "${user.home}/.ssh/id_github_personal";
+    };
+    secrets.ssh_github_work = {
+      file = ./secrets/ssh_github_work.age;
+      path = "${user.home}/.ssh/id_github_work";
+    };
+  };
+
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "github.com" = {
+        user = "git";
+        identityFile = "${user.home}/.ssh/id_github_personal";
+        identitiesOnly = true;
+      };
+      "github-work" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "${user.home}/.ssh/id_github_work";
+        identitiesOnly = true;
       };
     };
   };

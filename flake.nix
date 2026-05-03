@@ -12,7 +12,12 @@
     };
     claude-code-nix.url = "github:sadjow/claude-code-nix";
     codex-cli-nix.url = "github:sadjow/codex-cli-nix";
-    gws.url = "github:googleworkspace/cli";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+      inputs.darwin.follows = "nix-darwin";
+    };
   };
 
   outputs =
@@ -23,25 +28,34 @@
       nix-darwin,
       claude-code-nix,
       codex-cli-nix,
-      gws,
+      agenix,
       ...
     }:
     let
-      user = import ./user.nix;
+      darwinUser = {
+        username = "watanabekeisuke";
+        hostname = "k-watanabe";
+        home = "/Users/watanabekeisuke";
+      };
+      nixosUser = {
+        username = "nixos";
+        hostname = "nixos";
+        home = "/home/nixos";
+      };
       overlays = [ ];
-      mkExtraSpecialArgs = system: {
+      mkExtraSpecialArgs = system: user: {
         inherit user;
         claude-code = claude-code-nix.packages.${system}.default;
         codex = codex-cli-nix.packages.${system}.default;
-        gws = gws.packages.${system}.default;
+        agenix-pkg = agenix.packages.${system}.default;
       };
     in
     {
       # NixOS-WSL configuration
       nixosConfigurations = {
-        ${user.hostname} = nixpkgs.lib.nixosSystem {
+        ${nixosUser.hostname} = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit user; };
+          specialArgs = { user = nixosUser; };
           modules = [
             ./configuration.nix
             nixos-wsl.nixosModules.default
@@ -55,8 +69,13 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = mkExtraSpecialArgs "x86_64-linux";
-              home-manager.users.${user.username} = import ./home.nix;
+              home-manager.extraSpecialArgs = mkExtraSpecialArgs "x86_64-linux" nixosUser;
+              home-manager.users.${nixosUser.username} = {
+                imports = [
+                  agenix.homeManagerModules.default
+                  ./home.nix
+                ];
+              };
             }
           ];
         };
@@ -75,9 +94,9 @@
 
       # macOS (nix-darwin) configuration
       darwinConfigurations = {
-        ${user.hostname} = nix-darwin.lib.darwinSystem {
+        ${darwinUser.hostname} = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = { inherit user; };
+          specialArgs = { user = darwinUser; };
           modules = [
             ./darwin/configuration.nix
             { nixpkgs.overlays = overlays; }
@@ -86,9 +105,10 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
-              home-manager.extraSpecialArgs = mkExtraSpecialArgs "aarch64-darwin";
-              home-manager.users.${user.username} = {
+              home-manager.extraSpecialArgs = mkExtraSpecialArgs "aarch64-darwin" darwinUser;
+              home-manager.users.${darwinUser.username} = {
                 imports = [
+                  agenix.homeManagerModules.default
                   ./home.nix
                   ./darwin/home.nix
                 ];
