@@ -13,7 +13,11 @@
 
   programs.fish.interactiveShellInit = ''
     if command -q podman
-      set -gx DOCKER_HOST "unix://"(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}' ^/dev/null)
+        set socket (podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}' 2>/dev/null)
+
+        if test -n "$socket"
+            set -gx DOCKER_HOST "unix://$socket"
+        end
     end
   '';
 
