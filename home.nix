@@ -91,6 +91,8 @@
       ta = "tmux attach";
 
       c = "claude";
+
+      g = "gcd";
     };
     plugins = [
       { name = "fzf-fish";    src = pkgs.fishPlugins.fzf-fish.src; }
@@ -99,6 +101,15 @@
       { name = "autopair";    src = pkgs.fishPlugins.autopair.src; }
       { name = "sponge";      src = pkgs.fishPlugins.sponge.src; }
     ];
+    functions = {
+      gcd = ''
+        set -l dir (ghq list --full-path | fzf --query "$argv" --select-1 --exit-0)
+        if test -n "$dir"
+            cd $dir
+            commandline -f repaint
+        end
+      '';
+    };
   };
 
   programs.fzf = {
