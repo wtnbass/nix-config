@@ -167,6 +167,7 @@
       rebase.autoStash = "true";
       rebase.updateRefs = "true";
 
+      "url \"git@github.com:\"".insteadOf = "https://github.com/";
       "url \"git@github-work:EARTHBRAIN/\"".insteadOf = [
         "git@github.com:EARTHBRAIN/"
         "https://github.com/EARTHBRAIN/"
