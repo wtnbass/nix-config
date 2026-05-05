@@ -10,14 +10,8 @@
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    claude-code-nix.url = "github:sadjow/claude-code-nix";
-    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-      inputs.darwin.follows = "nix-darwin";
-    };
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
@@ -26,9 +20,8 @@
       nixos-wsl,
       home-manager,
       nix-darwin,
-      claude-code-nix,
-      codex-cli-nix,
-      agenix,
+      rust-overlay,
+      llm-agents,
       ...
     }:
     let
@@ -42,12 +35,12 @@
         hostname = "nixos";
         home = "/home/nixos";
       };
-      overlays = [ ];
+      overlays = [
+        rust-overlay.overlays.default
+        llm-agents.overlays.default
+      ];
       mkExtraSpecialArgs = system: user: {
         inherit user;
-        claude-code = claude-code-nix.packages.${system}.default;
-        codex = codex-cli-nix.packages.${system}.default;
-        agenix-pkg = agenix.packages.${system}.default;
       };
     in
     {
@@ -72,7 +65,6 @@
               home-manager.extraSpecialArgs = mkExtraSpecialArgs "x86_64-linux" nixosUser;
               home-manager.users.${nixosUser.username} = {
                 imports = [
-                  agenix.homeManagerModules.default
                   ./home.nix
                   ./wsl/home.nix
                 ];
@@ -109,7 +101,6 @@
               home-manager.extraSpecialArgs = mkExtraSpecialArgs "aarch64-darwin" darwinUser;
               home-manager.users.${darwinUser.username} = {
                 imports = [
-                  agenix.homeManagerModules.default
                   ./home.nix
                   ./darwin/home.nix
                 ];

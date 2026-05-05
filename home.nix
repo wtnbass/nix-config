@@ -1,9 +1,6 @@
 {
   pkgs,
   user,
-  claude-code,
-  codex,
-  agenix-pkg,
   ...
 }:
 
@@ -35,18 +32,24 @@
     nodejs
     bun
     pnpm
+    go
+    gopls
+    golangci-lint
+    delve
+    rust-bin.stable.latest.default
+    rust-analyzer
+    zig
+    zls
     vscode-langservers-extracted
     typescript-language-server
     markdown-oxide
     yaml-language-server
     tombi
-    claude-code
-    codex
-    agenix-pkg
-    age
     docker-client
     docker-compose
     docker-compose-language-service
+    llm-agents.claude-code
+    llm-agents.codex
   ];
 
   home.stateVersion = "25.05";
@@ -72,6 +75,10 @@
           if test -n "$WT_SESSION"
             printf "\e]9;9;%s\e\\" (wslpath -w "$PWD")
           end
+      end
+
+      if command -q mise
+        mise activate fish | source
       end
     '';
     shellAliases = {
@@ -230,18 +237,6 @@
           space = ":reload-all";
         };
       };
-    };
-  };
-
-  age = {
-    identityPaths = [ "${user.home}/.ssh/id_ed25519" ];
-    secrets.ssh_github_personal = {
-      file = ./secrets/ssh_github_personal.age;
-      path = "${user.home}/.ssh/id_github_personal";
-    };
-    secrets.ssh_github_work = {
-      file = ./secrets/ssh_github_work.age;
-      path = "${user.home}/.ssh/id_github_work";
     };
   };
 
