@@ -3,7 +3,11 @@
 {
   home.packages = with pkgs; [
     (callPackage ./cmd-eikana.nix { })
+    vscode
+    zed-editor
     podman
+    docker-client
+    docker-compose
   ];
 
   home.sessionPath = [

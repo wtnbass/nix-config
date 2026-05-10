@@ -38,8 +38,6 @@
       "ghostty"
       "cmux"
       "raycast"
-      "visual-studio-code"
-      "zed"
     ];
 
   };

@@ -32,24 +32,26 @@
     nodejs
     bun
     pnpm
-    go
-    gopls
-    golangci-lint
-    delve
-    rust-bin.stable.latest.default
-    rust-analyzer
-    zig
-    zls
+    # go
+    # gopls
+    # golangci-lint
+    # delve
+    # rust-bin.stable.latest.default
+    # rust-analyzer
+    # zig
+    # zls
+    # ghc
+    # cabal-install
+    # haskell-language-server
     vscode-langservers-extracted
     typescript-language-server
     markdown-oxide
     yaml-language-server
     tombi
-    docker-client
-    docker-compose
+    dockerfile-language-server
     docker-compose-language-service
-    llm-agents.claude-code
-    llm-agents.codex
+    claude-code
+    codex
   ];
 
   home.stateVersion = "25.05";
@@ -69,13 +71,6 @@
       set -g hydro_color_error red
       set -g hydro_color_prompt cyan
       set -g hydro_color_duration yellow
-
-      # Ref: https://learn.microsoft.com/ja-jp/windows/terminal/tutorials/new-tab-same-directory#fish
-      function storePathForWindowsTerminal --on-variable PWD
-          if test -n "$WT_SESSION"
-            printf "\e]9;9;%s\e\\" (wslpath -w "$PWD")
-          end
-      end
 
       if command -q mise
         mise activate fish | source

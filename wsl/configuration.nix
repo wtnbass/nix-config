@@ -22,7 +22,6 @@
     home = user.home;
     shell = pkgs.fish;
   };
-  programs.fish.enable = true;
 
   environment.systemPackages = with pkgs; [
     curl
@@ -30,7 +29,13 @@
     gnumake
     vim
     git
+    nix-nix-ld-rs
   ];
+
+  programs = {
+    nix-ld.enable = true;
+    fish.enable = true;
+  };
 
   wsl.enable = true;
   wsl.defaultUser = "nixos";

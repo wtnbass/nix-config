@@ -11,7 +11,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
-    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
@@ -21,7 +20,6 @@
       home-manager,
       nix-darwin,
       rust-overlay,
-      llm-agents,
       ...
     }:
     let
@@ -37,7 +35,6 @@
       };
       overlays = [
         rust-overlay.overlays.default
-        llm-agents.overlays.default
       ];
       mkExtraSpecialArgs = system: user: {
         inherit user;
@@ -50,7 +47,7 @@
           system = "x86_64-linux";
           specialArgs = { user = nixosUser; };
           modules = [
-            ./configuration.nix
+            ./wsl/configuration.nix
             nixos-wsl.nixosModules.default
             {
               system.stateVersion = "25.05";
@@ -71,17 +68,6 @@
               };
             }
           ];
-        };
-      };
-
-      templates = {
-        go = {
-          path = ./templates/go;
-          description = "Go development environment";
-        };
-        rust = {
-          path = ./templates/rust;
-          description = "Rust development environment";
         };
       };
 
