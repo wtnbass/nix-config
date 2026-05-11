@@ -1,9 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   home.sessionVariables = {
     DOCKER_HOST = "unix:///mnt/wsl/shared-docker/docker.sock";
   };
+
+  home.packages = with pkgs; [
+    codex
+  ];
 
   programs.fish.interactiveShellInit = ''
     # Ref: https://learn.microsoft.com/ja-jp/windows/terminal/tutorials/new-tab-same-directory#fish

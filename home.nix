@@ -51,7 +51,6 @@
     dockerfile-language-server
     docker-compose-language-service
     claude-code
-    codex
   ];
 
   home.stateVersion = "25.05";

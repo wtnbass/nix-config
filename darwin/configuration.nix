@@ -38,6 +38,7 @@
       "ghostty"
       "cmux"
       "raycast"
+      "codex-app"
     ];
 
   };
