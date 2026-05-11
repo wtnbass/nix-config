@@ -23,13 +23,15 @@
     shell = pkgs.fish;
   };
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     curl
     wget
     gnumake
     vim
     git
-    nix-nix-ld-rs
   ];
 
   programs = {

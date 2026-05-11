@@ -36,4 +36,8 @@ cat "$SSH_DIR/id_github_work.pub"
 echo
 echo "次の手順:"
 echo "  1. id_github_personal.pub / id_github_work.pub を該当 GitHub アカウントに登録"
+echo "      Github SSH key page: https://github.com/settings/keys"
 echo "  2. make で適用"
+echo "  3. 接続確認"
+echo "      ssh -T git@github.com"
+echo "      ssh -T git@github-work"
