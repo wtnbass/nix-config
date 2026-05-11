@@ -5,6 +5,10 @@
 }:
 
 {
+  imports = [
+    ./claude/home.nix
+  ];
+
   home.username = user.username;
   home.homeDirectory = user.home;
 
@@ -22,7 +26,6 @@
     ghq
     zoxide
     jq
-    difftastic
     gh
     lazygit
     yazi
@@ -135,6 +138,16 @@
     nix-direnv.enable = true;
   };
 
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      line-numbers = true;
+      side-by-side = true;
+    };
+  };
+
   programs.git = {
     enable = true;
 
@@ -142,7 +155,6 @@
       user.name = "wtnbass";
       user.email = "wtnbass@icloud.com";
       core.editor = "hx";
-      diff.external = "difft";
       merge.ff = "false";
       pull.ff = "only";
 
@@ -197,6 +209,7 @@
       }
     ];
   };
+
 
   xdg.configFile."helix/themes/kanagawa_transparent.toml".text = ''
     inherits = "kanagawa"
