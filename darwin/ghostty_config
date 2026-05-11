@@ -5,3 +5,7 @@ background-opacity = 0.8
 macos-option-as-alt = left
 macos-titlebar-style = native
 window-save-state = always
+
+notify-on-command-finish = unfocused
+notify-on-command-finish-action = bell,notify
+notify-on-command-finish-after = 5s
