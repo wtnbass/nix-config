@@ -4,7 +4,7 @@
   imports = [
     ../../home/claude
     ../../home/fish.nix
-    ../../home/ghostty
+    ../../home/ghostty.nix
     ../../home/git.nix
     ../../home/helix.nix
     ../../home/langs

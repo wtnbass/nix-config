@@ -1,0 +1,23 @@
+{ ... }:
+
+# ghostty 本体は homebrew cask からインストールしているので
+# home-manager では設定ファイルのみ管理する。
+{
+  programs.ghostty = {
+    enable = true;
+    package = null;
+    settings = {
+      font-family = "UDEV Gothic NF";
+      font-thicken = true;
+      theme = "Kanagawa Wave";
+      background-opacity = 0.8;
+      macos-option-as-alt = "left";
+      macos-titlebar-style = "native";
+      window-save-state = "always";
+
+      notify-on-command-finish = "always";
+      notify-on-command-finish-action = "bell,notify";
+      notify-on-command-finish-after = "5s";
+    };
+  };
+}
