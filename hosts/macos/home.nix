@@ -25,6 +25,7 @@
     podman
     docker-client
     docker-compose
+    udev-gothic-nf
   ];
 
   home.sessionPath = [
