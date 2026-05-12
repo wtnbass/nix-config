@@ -10,5 +10,6 @@
     tombi
     dockerfile-language-server
     docker-compose-language-service
+    bash-language-server
   ];
 }
