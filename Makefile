@@ -20,4 +20,4 @@ clean:
 
 # 新 PC で実行: SSH 鍵 (id_ed25519, id_github_personal, id_github_work) を生成
 setup-ssh-keys:
-	./scripts/setup-ssh-keys.sh
+	./setup-ssh.sh

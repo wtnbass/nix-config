@@ -35,6 +35,10 @@
       };
       overlays = [
         rust-overlay.overlays.default
+        # カスタムパッケージ (pkgs/ 配下) を pkgs.<name> として公開する
+        (final: _prev: {
+          cmd-eikana = final.callPackage ./pkgs/cmd-eikana.nix { };
+        })
       ];
       mkExtraSpecialArgs = system: user: {
         inherit user;
@@ -47,7 +51,7 @@
           system = "x86_64-linux";
           specialArgs = { user = nixosUser; };
           modules = [
-            ./wsl/configuration.nix
+            ./hosts/wsl/configuration.nix
             nixos-wsl.nixosModules.default
             {
               system.stateVersion = "25.05";
@@ -61,10 +65,7 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = mkExtraSpecialArgs "x86_64-linux" nixosUser;
               home-manager.users.${nixosUser.username} = {
-                imports = [
-                  ./home.nix
-                  ./wsl/home.nix
-                ];
+                imports = [ ./hosts/wsl/home.nix ];
               };
             }
           ];
@@ -77,7 +78,7 @@
           system = "aarch64-darwin";
           specialArgs = { user = darwinUser; };
           modules = [
-            ./darwin/configuration.nix
+            ./hosts/macos/configuration.nix
             { nixpkgs.overlays = overlays; }
             home-manager.darwinModules.home-manager
             {
@@ -86,10 +87,7 @@
               home-manager.backupFileExtension = "backup";
               home-manager.extraSpecialArgs = mkExtraSpecialArgs "aarch64-darwin" darwinUser;
               home-manager.users.${darwinUser.username} = {
-                imports = [
-                  ./home.nix
-                  ./darwin/home.nix
-                ];
+                imports = [ ./hosts/macos/home.nix ];
               };
             }
           ];

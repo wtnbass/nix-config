@@ -1,6 +1,22 @@
-{ pkgs, ... }:
+{ pkgs, user, ... }:
 
 {
+  imports = [
+    ../../home/claude
+    ../../home/fish.nix
+    ../../home/git.nix
+    ../../home/helix.nix
+    ../../home/langs
+    ../../home/ssh.nix
+    ../../home/tmux.nix
+    ../../home/tools.nix
+  ];
+
+  home.username = user.username;
+  home.homeDirectory = user.home;
+  home.stateVersion = "25.05";
+  programs.home-manager.enable = true;
+
   home.sessionVariables = {
     DOCKER_HOST = "unix:///mnt/wsl/shared-docker/docker.sock";
   };

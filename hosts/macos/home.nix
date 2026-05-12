@@ -1,8 +1,25 @@
-{ pkgs, ... }:
+{ pkgs, user, ... }:
 
 {
+  imports = [
+    ../../home/claude
+    ../../home/fish.nix
+    ../../home/ghostty
+    ../../home/git.nix
+    ../../home/helix.nix
+    ../../home/langs
+    ../../home/ssh.nix
+    ../../home/tmux.nix
+    ../../home/tools.nix
+  ];
+
+  home.username = user.username;
+  home.homeDirectory = user.home;
+  home.stateVersion = "25.05";
+  programs.home-manager.enable = true;
+
   home.packages = with pkgs; [
-    (callPackage ./cmd-eikana.nix { })
+    cmd-eikana
     vscode
     zed-editor
     podman
@@ -24,7 +41,4 @@
         end
     end
   '';
-
-  # Ghostty configuration
-  xdg.configFile."ghostty/config".source = ./ghostty_config;
 }
