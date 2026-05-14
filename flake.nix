@@ -11,15 +11,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
+    agent-skills-nix.url = "github:Kyure-A/agent-skills-nix";
+    anthropic-skills = {
+      url = "github:anthropics/skills";
+      flake = false;
+    };
   };
 
   outputs =
-    {
+    inputs@{
       nixpkgs,
       nixos-wsl,
       home-manager,
       nix-darwin,
       rust-overlay,
+      agent-skills-nix,
       ...
     }:
     let
@@ -41,7 +47,7 @@
         })
       ];
       mkExtraSpecialArgs = system: user: {
-        inherit user;
+        inherit user inputs;
       };
     in
     {
@@ -64,6 +70,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = mkExtraSpecialArgs "x86_64-linux" nixosUser;
+              home-manager.sharedModules = [ agent-skills-nix.homeManagerModules.default ];
               home-manager.users.${nixosUser.username} = {
                 imports = [ ./hosts/wsl/home.nix ];
               };
@@ -86,6 +93,7 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
               home-manager.extraSpecialArgs = mkExtraSpecialArgs "aarch64-darwin" darwinUser;
+              home-manager.sharedModules = [ agent-skills-nix.homeManagerModules.default ];
               home-manager.users.${darwinUser.username} = {
                 imports = [ ./hosts/macos/home.nix ];
               };

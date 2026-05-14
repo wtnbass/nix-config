@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../home/agents
     ../../home/claude
     ../../home/fish.nix
     ../../home/git.nix
@@ -17,12 +18,9 @@
   home.stateVersion = "25.05";
   programs.home-manager.enable = true;
 
-  home.sessionVariables = {
-    DOCKER_HOST = "unix:///mnt/wsl/shared-docker/docker.sock";
-  };
-
   home.packages = with pkgs; [
     codex
+    gcc
   ];
 
   programs.fish.interactiveShellInit = ''

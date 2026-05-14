@@ -19,3 +19,11 @@ flake をベースに構成され、ほとんどの設定は home-manager で行
 ## WSL
 
 nix-ld を使う。 window ホストで存在していて欲しいパッケージ (vscode, zed, docker など) は home.nix に記載しない。
+
+## Tasks
+
+定期的に実行するコマンドは make を使用する。
+switch や update, clean などが該当する。
+
+@Makefile
+

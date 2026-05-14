@@ -21,6 +21,7 @@
     name = user.username;
     home = user.home;
     shell = pkgs.fish;
+    extraGroups = [ "docker" ];
   };
 
   # Allow unfree packages
@@ -32,7 +33,10 @@
     gnumake
     vim
     git
+    docker-compose
   ];
+
+  virtualisation.docker.enable = true;
 
   programs = {
     nix-ld.enable = true;

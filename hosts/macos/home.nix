@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../home/agents
     ../../home/claude
     ../../home/fish.nix
     ../../home/ghostty.nix
