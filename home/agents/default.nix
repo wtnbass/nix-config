@@ -13,7 +13,7 @@
     skills.enable = [
       "frontend-design"
       "skill-creator"
-      "nix-config"
+      "git-commit"
     ];
     targets.claude.enable = true;
     targets.codex.enable = true;
