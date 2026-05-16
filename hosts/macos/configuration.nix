@@ -39,6 +39,7 @@
       "cmux"
       "raycast"
       "codex-app"
+      "zed"
     ];
 
   };

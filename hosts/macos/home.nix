@@ -11,6 +11,7 @@
     ../../home/ssh.nix
     ../../home/tmux.nix
     ../../home/tools.nix
+    ../../home/zed-editor.nix
   ];
 
   home.username = user.username;
@@ -21,7 +22,6 @@
   home.packages = with pkgs; [
     cmd-eikana
     vscode
-    zed-editor
     podman
     docker-client
     docker-compose
