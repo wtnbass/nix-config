@@ -28,5 +28,9 @@
     ];
     targets.claude.enable = true;
     targets.codex.enable = true;
+    targets.pi = {
+      enable = true;
+      dest = "\${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}/skills";
+    };
   };
 }
