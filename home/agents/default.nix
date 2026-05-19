@@ -25,6 +25,7 @@
       "frontend-design"
       "skill-creator"
       "git-commit"
+      "nix-run"
     ];
     targets.claude.enable = true;
     targets.codex.enable = true;
