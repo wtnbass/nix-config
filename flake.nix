@@ -16,6 +16,10 @@
       url = "github:anthropics/skills";
       flake = false;
     };
+    google-modern-web-guidance = {
+      url = "github:GoogleChrome/modern-web-guidance";
+      flake = false;
+    };
   };
 
   outputs =

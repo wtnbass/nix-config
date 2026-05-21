@@ -18,6 +18,10 @@
       input = "anthropic-skills";
       subdir = "skills";
     };
+    sources.google-modern-web-guidance = {
+      input = "google-modern-web-guidance";
+      subdir = "skills";
+    };
     sources.local = {
       path = ./skills;
     };
@@ -26,6 +30,7 @@
       "skill-creator"
       "git-commit"
       "nix-run"
+      "modern-web-guidance"
     ];
     targets.claude.enable = true;
     targets.codex.enable = true;
