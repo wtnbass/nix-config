@@ -19,6 +19,10 @@
       input = "anthropic-skills";
       subdir = "skills";
     };
+    sources.mattpocock-skills-engineering = {
+      input = "mattpocock-skills";
+      subdir = "skills/engineering";
+    };
     sources.google-modern-web-guidance = {
       input = "google-modern-web-guidance";
       subdir = "skills";
@@ -32,6 +36,8 @@
       "git-commit"
       "nix-run"
       "modern-web-guidance"
+      "grill-with-docs"
+      "tdd"
     ];
     targets.claude.enable = true;
     targets.codex.enable = true;
