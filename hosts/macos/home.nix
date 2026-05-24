@@ -6,7 +6,7 @@
     ../../home/fish.nix
     ../../home/ghostty.nix
     ../../home/git.nix
-    ../../home/helix.nix
+    ../../home/helix
     ../../home/langs
     ../../home/ssh.nix
     ../../home/tmux.nix
