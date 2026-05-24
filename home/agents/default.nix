@@ -2,8 +2,9 @@
 
 {
   home.packages = with pkgs; [
-    claude-code
-    pi-coding-agent
+    llm-agents.claude-code
+    llm-agents.codex
+    llm-agents.pi
   ];
 
   # statusline は ~/.claude/settings.json の statusLine 設定からこのパスを参照している

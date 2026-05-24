@@ -1,4 +1,8 @@
 {
+  nixConfig = {
+    extra-substituters = [ "https://cache.numtide.com" ];
+    extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
@@ -11,6 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
+    llm-agents.url = "github:numtide/llm-agents.nix";
     agent-skills-nix.url = "github:Kyure-A/agent-skills-nix";
     anthropic-skills = {
       url = "github:anthropics/skills";
@@ -29,6 +34,7 @@
       home-manager,
       nix-darwin,
       rust-overlay,
+      llm-agents,
       agent-skills-nix,
       ...
     }:
@@ -45,6 +51,7 @@
       };
       overlays = [
         rust-overlay.overlays.default
+        llm-agents.overlays.default
         # カスタムパッケージ (pkgs/ 配下) を pkgs.<name> として公開する
         (final: _prev: {
           cmd-eikana = final.callPackage ./pkgs/cmd-eikana.nix { };
