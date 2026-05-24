@@ -22,9 +22,9 @@
   home.packages = with pkgs; [
     cmd-eikana
     vscode
-    podman
-    docker-client
-    docker-compose
+    # podman
+    # docker-client
+    # docker-compose
     udev-gothic-nf
   ];
 
