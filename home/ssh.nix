@@ -4,17 +4,17 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "github.com" = {
-        user = "git";
-        identityFile = "${user.home}/.ssh/id_github_personal";
-        identitiesOnly = true;
+        User = "git";
+        IdentityFile = "${user.home}/.ssh/id_github_personal";
+        IdentitiesOnly = true;
       };
       "github-work" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "${user.home}/.ssh/id_github_work";
-        identitiesOnly = true;
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "${user.home}/.ssh/id_github_work";
+        IdentitiesOnly = true;
       };
     };
   };
