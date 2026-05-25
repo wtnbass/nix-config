@@ -69,7 +69,7 @@
         })
       ];
       mkExtraSpecialArgs = system: user: {
-        inherit user inputs;
+        inherit user inputs system;
       };
     in
     {
