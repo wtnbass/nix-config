@@ -1,6 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  home.packages = [ pkgs.git-wt ];
+
   programs.delta = {
     enable = true;
     enableGitIntegration = true;
@@ -47,6 +49,13 @@
       rebase.autoSquash = "true";
       rebase.autoStash = "true";
       rebase.updateRefs = "true";
+
+      # git-wt (home.packages 参照)
+      # worktree を repo の兄弟 ~/ghq/.../{repo}-worktrees/<branch> に作る。
+      # ghq は repo で探索を止めず -worktrees 配下も拾うため worktree も
+      # `ghq list` (= gcd / ghw の候補) に並ぶ。これは意図した挙動。
+      wt.basedir = "../{gitroot}-worktrees";
+      wt.copy = ".env*"; # 新 worktree に .env 系 (gitignore 対象) をコピー
 
       # work アカウントの clone を ssh の github-work ホスト (ssh.nix 参照) 経由に書き換える
       "url \"git@github.com:\"".insteadOf = "https://github.com/";

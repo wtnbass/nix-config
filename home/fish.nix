@@ -12,9 +12,12 @@
       set -g hydro_color_prompt cyan
       set -g hydro_color_duration yellow
 
-      # mise (tools.nix) のシェル統合
       if command -q mise
         mise activate fish | source
+      end
+
+      if command -q git-wt
+        git wt --init fish | source
       end
     '';
     shellAliases = {
