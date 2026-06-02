@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -6,5 +6,9 @@
     bun
     pnpm
     typescript-language-server
+  ];
+
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.bun/bin"
   ];
 }
