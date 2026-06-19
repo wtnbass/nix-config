@@ -23,6 +23,10 @@
       input = "mattpocock-skills";
       subdir = "skills/engineering";
     };
+    sources.mattpocock-skills-productivity = {
+      input = "mattpocock-skills";
+      subdir = "skills/productivity";
+    };
     sources.google-modern-web-guidance = {
       input = "google-modern-web-guidance";
       subdir = "skills";
@@ -36,6 +40,8 @@
       "git-commit"
       "nix-run"
       "modern-web-guidance"
+      "grill-me"
+      "handoff"
       "grill-with-docs"
       "tdd"
     ];
