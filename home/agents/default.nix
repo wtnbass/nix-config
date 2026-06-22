@@ -40,7 +40,7 @@
       "git-commit"
       "nix-run"
       "modern-web-guidance"
-      "grill-me"
+      "grilling"
       "handoff"
       "grill-with-docs"
       "tdd"
