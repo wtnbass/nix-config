@@ -5,5 +5,5 @@
     enable = true;    
     vimAlias = true;
   };
-  home.file.".config/nvim".source = inputs.astronvim;
+  home.file.".config/nvim".source = inputs.lazyvim;
 }

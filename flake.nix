@@ -36,8 +36,8 @@
       url = "github:GoogleChrome/modern-web-guidance";
       flake = false;
     };
-    astronvim = {
-      url = "github:AstroNvim/template/main";
+    lazyvim = {
+      url = "github:LazyVim/starter";
       flake = false;
     };
   };

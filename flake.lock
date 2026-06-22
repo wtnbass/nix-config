@@ -35,23 +35,6 @@
         "type": "github"
       }
     },
-    "astronvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1775146383,
-        "narHash": "sha256-zrwpZ6Ow5qL9dml5gJFmLEOlQa02qm/AdFYGlfpw8fY=",
-        "owner": "AstroNvim",
-        "repo": "template",
-        "rev": "49a7161b776f8bc6c23508819ea1ad4e7b359bee",
-        "type": "github"
-      },
-      "original": {
-        "owner": "AstroNvim",
-        "ref": "main",
-        "repo": "template",
-        "type": "github"
-      }
-    },
     "blueprint": {
       "inputs": {
         "nixpkgs": [
@@ -201,6 +184,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "lazyvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733936199,
+        "narHash": "sha256-QrpnlDD4r1X4C8PqBhQ+S3ar5C+qDrU1Jm/lPqyMIFM=",
+        "owner": "LazyVim",
+        "repo": "starter",
+        "rev": "803bc181d7c0d6d5eeba9274d9be49b287294d99",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LazyVim",
+        "repo": "starter",
         "type": "github"
       }
     },
@@ -368,9 +367,9 @@
       "inputs": {
         "agent-skills-nix": "agent-skills-nix",
         "anthropic-skills": "anthropic-skills",
-        "astronvim": "astronvim",
         "google-modern-web-guidance": "google-modern-web-guidance",
         "home-manager": "home-manager_2",
+        "lazyvim": "lazyvim",
         "llm-agents": "llm-agents",
         "mattpocock-skills": "mattpocock-skills",
         "nix-darwin": "nix-darwin",
