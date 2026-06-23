@@ -91,6 +91,21 @@ in
           # v b: カーソル行の git blame をステータスラインに表示 (helix 25.07 の expansions)
           v.b = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}";
         };
+        space.e = [
+          ":sh rm -f /tmp/yazi-chooser"
+          ":insert-output yazi \"%{buffer_name}\" --chooser-file=/tmp/yazi-chooser"
+          ":sh printf '\\x1b[?1049h\\x1b[?2004h' > /dev/tty"
+          ":open %sh{cat /tmp/yazi-chooser}"
+          ":redraw"
+          ":set mouse false"
+          ":set mouse true"
+        ];
+        ret.g = [
+          ":write-all"
+          ":insert-output lazygit > /dev/tty"
+          ":redraw"
+          ":reload-all"
+        ];
       };
     };
     languages.language = map mkFmtLang fmtLanguages;
