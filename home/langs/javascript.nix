@@ -5,7 +5,7 @@
     nodejs
     bun
     pnpm
-    typescript-language-server
+    vtsls
   ];
 
   home.sessionPath = [

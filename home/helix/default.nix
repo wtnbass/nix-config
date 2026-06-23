@@ -1,49 +1,4 @@
 { pkgs, ... }:
-
-let
-  # プロジェクトが使うフォーマッタ(biome / prettier / oxfmt)を自動判定して整形する
-  # ディスパッチャ。ローカルの node_modules/.bin を優先し、無ければここで注入した
-  # Nix 版にフォールバックする。詳細は ./hx-fmt-dispatch.sh を参照。
-  hx-fmt-dispatch = pkgs.writeShellApplication {
-    name = "hx-fmt-dispatch";
-    runtimeInputs = with pkgs; [
-      biome
-      prettier
-      oxfmt
-      jq
-      coreutils
-    ];
-    text = builtins.readFile ./hx-fmt-dispatch.sh;
-  };
-
-  # auto-format を有効にし、上記ディスパッチャを通す言語 (JS/TS 系フル)。
-  fmtLanguages = [
-    "javascript"
-    "jsx"
-    "typescript"
-    "tsx"
-    "json"
-    "jsonc"
-    "json5"
-    "css"
-    "scss"
-    "html"
-    "vue"
-    "svelte"
-    "astro"
-    "yaml"
-    "graphql"
-    "markdown"
-  ];
-  mkFmtLang = name: {
-    inherit name;
-    auto-format = true;
-    formatter = {
-      command = "${hx-fmt-dispatch}/bin/hx-fmt-dispatch";
-      args = [ "%{buffer_name}" ];
-    };
-  };
-in
 {
   home.sessionVariables = {
     EDITOR = "hx";
@@ -85,42 +40,57 @@ in
         };
       };
       keys.normal = {
+        "H" = "goto_previous_buffer";
+        "L" = "goto_next_buffer";
+        "A-j" = [ "extend_to_line_bounds" "delete_selection" "paste_after" ];
+        "A-k" = [ "extend_to_line_bounds" "delete_selection" "move_line_up" "paste_before" ];
+        "A-J" = [ "extend_to_line_bounds" "yank" "paste_after" ];
+        "A-K" = [ "extend_to_line_bounds" "yank" "paste_before" ];
         space = {
           space = ":reload-all";
-          # space v を git/vcs 用サブメニューにする (space g は changed_file_picker のため避ける)。
-          # v b: カーソル行の git blame をステータスラインに表示 (helix 25.07 の expansions)
-          v.b = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}";
+          e = [
+            ":sh rm -f /tmp/yazi-chooser"
+            ":insert-output yazi \"%{buffer_name}\" --chooser-file=/tmp/yazi-chooser"
+            ":sh printf '\\x1b[?1049h\\x1b[?2004h' > /dev/tty"
+            ":open %sh{cat /tmp/yazi-chooser}"
+            ":redraw"
+            ":set mouse false"
+            ":set mouse true"
+          ];
+          l = [
+            ":sh rm -f /tmp/hx-lazygit-buffer"
+            ":write-all"
+            ":sh printf '%s' \"%{buffer_name}\" > /tmp/hx-lazygit-buffer"
+            ":insert-output lazygit > /dev/tty"
+            ":sh printf '\\x1b[?1049h\\x1b[?2004h' > /dev/tty"
+            ":open %sh{cat /tmp/hx-lazygit-buffer}"
+            ":redraw"
+            ":reload-all"
+            ":set mouse false"
+            ":set mouse true"
+          ];
         };
-        space.e = [
-          ":sh rm -f /tmp/yazi-chooser"
-          ":insert-output yazi \"%{buffer_name}\" --chooser-file=/tmp/yazi-chooser"
-          ":sh printf '\\x1b[?1049h\\x1b[?2004h' > /dev/tty"
-          ":open %sh{cat /tmp/yazi-chooser}"
-          ":redraw"
-          ":set mouse false"
-          ":set mouse true"
-        ];
-        ret.g = [
-          ":write-all"
-          ":insert-output lazygit > /dev/tty"
-          ":redraw"
-          ":reload-all"
-        ];
+        ret.b = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}";
+        Z.Z = ":write-quit-all";
       };
     };
-    languages.language = map mkFmtLang fmtLanguages;
-    languages.language-server.typescript-language-server.config = {
-      # nixpkgs の typescript-language-server は tsserver(typescript 本体) を同梱しないため、
-      # プロジェクトに typescript が無くても LSP が動くよう Nix の tsserver を指す。
-      # プロジェクトに node_modules/typescript があればそちらが優先される。
-      tsserver.path = "${pkgs.typescript}/lib/node_modules/typescript/lib/tsserver.js";
-      # 補完を確定すると import 文を自動挿入する (VSCode 同様の auto-import)。
-      preferences = {
-        includeCompletionsForModuleExports = true;
-        includeCompletionsForImportStatements = true;
-        # 挿入する import パスの形式: shortest / relative / non-relative / project-relative
-        importModuleSpecifierPreference = "shortest";
+    languages.language-server.vtsls = {
+      command = "vtsls";
+      args = [ "--stdio" ];
+      config = {
+        typescript = {
+          tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib";
+          preferences.importModuleSpecifier = "shortest";
+        };
+        javascript.preferences.importModuleSpecifier = "shortest";
+        vtsls.autoUseWorkspaceTsdk = true;
       };
     };
+    languages.language = map (name: { inherit name; language-servers = [ "vtsls" ]; }) [
+      "typescript"
+      "tsx"
+      "javascript"
+      "jsx"
+    ];
   };
 }
