@@ -26,6 +26,7 @@
     # docker-client
     # docker-compose
     udev-gothic-nf
+    macism
   ];
 
   home.sessionPath = [
@@ -42,4 +43,12 @@
         end
     end
   '';
+
+  programs.helix.settings = {
+    keys.normal.esc = ":sh macism com.appli.keylayout.ABC 0";
+    keys.insert.esc = [
+      "normal_mode"
+      ":sh macism com.apple.keylayout.ABC 0"
+    ];
+  };
 }

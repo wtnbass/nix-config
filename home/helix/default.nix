@@ -41,6 +41,12 @@
         line-number = "relative";
         cursorline = true;
         bufferline = "multiple";
+        color-modes = true;
+        true-color = true;
+        auto-save = true;
+        indent-guides = {
+          render = true;
+        };
         cursor-shape = {
           insert = "bar";
           normal = "block";
@@ -51,18 +57,15 @@
             "mode"
             "spinner"
             "file-name"
+            "file-modification-indicator"
           ];
           center = [ "version-control" ];
           right = [
             "diagnostics"
             "selections"
             "position"
-            "file-encoding"
+            "file-type"
           ];
-          separator = "|";
-          mode.normal = "NORMAL";
-          mode.insert = "INSERT";
-          mode.select = "SELECT";
         };
         file-picker = {
           hidden = false;
