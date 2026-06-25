@@ -32,6 +32,7 @@
       ga = "git add .";
       gc = "git commit";
       gl = "git log --oneline";
+      gf = "git fetch -ap";
       gp = "git push";
       gpl = "git pull";
       gsw = "git switch";
