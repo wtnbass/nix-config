@@ -21,7 +21,7 @@ hosts/
 home/              # home-manager モジュール。各 host が必要なものを import
   claude/          # claude-code + statusline
   ghostty/         # ghostty 設定 (現状 macOS のみで import)
-  langs/           # 言語別。default.nix は普段使う言語だけ集約
+  langs/           # 言語 runtime / build tool。LSP / formatter は helix 側で管理
   fish.nix git.nix helix.nix ssh.nix tmux.nix tools.nix
 pkgs/              # カスタムパッケージ。flake.nix の overlay で公開
 setup-ssh.sh       # 新マシン用の SSH 鍵生成スクリプト
@@ -29,8 +29,9 @@ setup-ssh.sh       # 新マシン用の SSH 鍵生成スクリプト
 
 ### 言語環境の追加
 
-`home/langs/<lang>.nix` を作成し、常用するなら `home/langs/default.nix` の `imports` に追加する。
-go / rust / zig / haskell は実装済みだが default に入れていないので、必要になったら import する。
+常用する runtime / build tool は `home/langs/default.nix` に集約する。
+LSP / formatter は `home/helix/default.nix` に寄せている。
+言語ごとに分ける必要が出てきたら、その時点で `home/langs/<lang>.nix` へ切り出す。
 
 ## 新 PC セットアップ
 
