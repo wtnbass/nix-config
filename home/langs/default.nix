@@ -1,54 +1,38 @@
 {
   config,
   pkgs,
-  system,
   ...
 }:
 
-# imports は config / pkgs より先に解決されるため、pkgs.stdenv で分岐すると
-# 無限再帰になる。代わりに specialArgs で渡す system 文字列で判定する。
-let
-  isDarwin = builtins.match ".*-darwin" system != null;
-in
 {
-  # LSP / formatter は Helix 側で管理し、ここは runtime / build tool に寄せる。
-  home.packages =
-    with pkgs;
-    [
-      nodejs
-      deno
-      bun
-      pnpm
+  home.packages = with pkgs; [
+    nodejs
+    deno
+    bun
+    pnpm
 
-      lua
+    python3
+    uv
 
-      python3
-      uv
+    php
+    phpPackages.composer
 
-      rust-bin.stable.latest.default
+    lua
 
-      go
-      golangci-lint
-      delve
+    rust-bin.stable.latest.default
 
-      ghc
-      cabal-install
+    go
+    golangci-lint
+    delve
 
-      zig
+    ghc
+    cabal-install
 
-      jdk
-      maven
-      gradle
-      kotlin
-
-      php
-      phpPackages.composer
-    ]
-    ++ (if isDarwin then [ pkgs.flutter ] else [ ]);
+    flutter
+  ];
 
   home.sessionVariables = {
     GOPATH = "${config.home.homeDirectory}/go";
-    JAVA_HOME = "${pkgs.jdk.home}";
   };
 
   home.sessionPath = [

@@ -10,8 +10,6 @@
     pkgs.dockerfile-language-server
     pkgs.gopls
     pkgs.haskell-language-server
-    pkgs.jdt-language-server
-    pkgs.kotlin-language-server
     pkgs.lua-language-server
     pkgs.markdown-oxide
     pkgs.nixd
@@ -77,9 +75,6 @@
           max-indent-retain = 0;
           wrap-indicator = "";
         };
-        # LSP の診断をコード行に表示する。各行の行末に hint 以上を簡易表示し、
-        # カーソルが乗った行は warning 以上をインライン展開する。
-        # 全行で詳細を展開したいなら inline-diagnostics.other-lines も "hint" にする。
         end-of-line-diagnostics = "hint";
         inline-diagnostics = {
           cursor-line = "warning";
@@ -236,6 +231,26 @@
             command = "yamlfmt";
             args = [ "-" ];
           };
+          auto-format = true;
+        }
+        {
+          name = "go";
+          language-servers = [ "gopls" ];
+          auto-format = true;
+        }
+        {
+          name = "rust";
+          language-servers = [ "rust-analyzer" ];
+          auto-format = true;
+        }
+        {
+          name = "haskell";
+          language-servers = [ "haskell-language-server" ];
+          auto-format = true;
+        }
+        {
+          name = "php";
+          language-servers = [ "intelephense" ];
           auto-format = true;
         }
       ];
