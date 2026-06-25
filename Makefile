@@ -1,4 +1,5 @@
 UNAME := $(shell uname)
+SWITCH_ULIMIT ?= 65535
 
 .PHONY: switch update clean setup-ssh-keys
 
@@ -6,10 +7,10 @@ UNAME := $(shell uname)
 
 ifeq ($(UNAME), Darwin)
 switch:
-	sudo darwin-rebuild switch --flake .
+	ulimit -n $(SWITCH_ULIMIT) && sudo darwin-rebuild switch --flake .
 else
 switch:
-	sudo nixos-rebuild switch --flake .
+	ulimit -n $(SWITCH_ULIMIT) && sudo nixos-rebuild switch --flake .
 endif
 
 update:
