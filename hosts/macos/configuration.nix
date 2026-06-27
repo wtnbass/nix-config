@@ -35,6 +35,7 @@
 
     brews = [
       "mise"
+      "container"
     ];
 
     casks = [

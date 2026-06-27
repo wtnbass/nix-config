@@ -6,32 +6,44 @@
 
 {
   home.packages = with pkgs; [
+    nixd
+    nixfmt
     nodejs
     deno
     bun
     pnpm
-
+    vtsls
+    vscode-langservers-extracted
+    tailwindcss-language-server
+    markdown-oxide
+    yaml-language-server
+    yamlfmt
+    tombi
+    bash-language-server
+    docker-compose-language-service
+    dockerfile-language-server
     python3
     uv
-
-    # php
-    # phpPackages.composer
-
-    # lua
-
+    ruff
+    php
+    phpPackages.composer
+    intelephense
+    lua
+    lua-language-server
+    stylua
     jdk
-    maven
-
+    jdt-language-server
+    lombok
     go
     golangci-lint
     delve
-
-    # rust-bin.stable.latest.default
-
-    # ghc
-    # cabal-install
-
-    # flutter
+    gopls
+    rust-bin.stable.latest.default
+    rust-analyzer
+    ghc
+    cabal-install
+    haskell-language-server
+    flutter
   ];
 
   home.sessionVariables = {
