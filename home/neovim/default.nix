@@ -2,7 +2,7 @@
 
 {
   programs.neovim = {
-    enable = true;    
+    enable = true;
     vimAlias = true;
   };
   home.file.".config/nvim".source = inputs.lazyvim;

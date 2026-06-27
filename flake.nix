@@ -5,7 +5,7 @@
       "https://cache.numtide.com"
     ];
     extra-trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" 
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
     ];
   };
@@ -67,10 +67,6 @@
       overlays = [
         rust-overlay.overlays.default
         llm-agents.overlays.default
-        # カスタムパッケージ (pkgs/ 配下) を pkgs.<name> として公開する
-        (final: _prev: {
-          cmd-eikana = final.callPackage ./pkgs/cmd-eikana.nix { };
-        })
       ];
       mkExtraSpecialArgs = system: user: {
         inherit user inputs system;
@@ -81,7 +77,9 @@
       nixosConfigurations = {
         ${nixosUser.hostname} = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { user = nixosUser; };
+          specialArgs = {
+            user = nixosUser;
+          };
           modules = [
             ./hosts/wsl/configuration.nix
             nixos-wsl.nixosModules.default
@@ -109,7 +107,9 @@
       darwinConfigurations = {
         ${darwinUser.hostname} = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = { user = darwinUser; };
+          specialArgs = {
+            user = darwinUser;
+          };
           modules = [
             ./hosts/macos/configuration.nix
             { nixpkgs.overlays = overlays; }

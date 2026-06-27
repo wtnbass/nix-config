@@ -7,6 +7,7 @@
     ../../home/ghostty.nix
     ../../home/git.nix
     ../../home/helix
+    ../../home/karabiner.nix
     ../../home/langs
     ../../home/ssh.nix
     ../../home/tmux.nix
@@ -20,13 +21,11 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    cmd-eikana
     vscode
     # podman
     # docker-client
     # docker-compose
     udev-gothic-nf
-    macism
   ];
 
   home.sessionPath = [
@@ -44,11 +43,4 @@
     end
   '';
 
-  programs.helix.settings = {
-    keys.normal.esc = ":sh macism com.appli.keylayout.ABC 0";
-    keys.insert.esc = [
-      "normal_mode"
-      ":sh macism com.apple.keylayout.ABC 0"
-    ];
-  };
 }

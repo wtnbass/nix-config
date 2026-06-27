@@ -1,5 +1,6 @@
 UNAME := $(shell uname)
 SWITCH_ULIMIT ?= 65535
+CLEAN_KEEP_GENERATIONS ?= 3
 
 .PHONY: switch update clean setup-ssh-keys
 
@@ -14,10 +15,10 @@ switch:
 endif
 
 update:
-	nix flake update
+	ulimit -n $(SWITCH_ULIMIT) && nix flake update
 
 clean:
-	nix-collect-garbage
+	CLEAN_KEEP_GENERATIONS=$(CLEAN_KEEP_GENERATIONS) ./scripts/clean-nix-store.sh
 
 # 新 PC で実行: SSH 鍵 (id_ed25519, id_github_personal, id_github_work) を生成
 setup-ssh-keys:

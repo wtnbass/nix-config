@@ -14,25 +14,29 @@
     python3
     uv
 
-    php
-    phpPackages.composer
+    # php
+    # phpPackages.composer
 
-    lua
+    # lua
 
-    rust-bin.stable.latest.default
+    jdk
+    maven
 
     go
     golangci-lint
     delve
 
-    ghc
-    cabal-install
+    # rust-bin.stable.latest.default
 
-    flutter
+    # ghc
+    # cabal-install
+
+    # flutter
   ];
 
   home.sessionVariables = {
     GOPATH = "${config.home.homeDirectory}/go";
+    JAVA_HOME = "${pkgs.jdk.home}";
   };
 
   home.sessionPath = [

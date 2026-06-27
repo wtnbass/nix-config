@@ -43,6 +43,7 @@
       "grilling"
       "handoff"
       "grill-with-docs"
+      "japanese-tech-writing"
       "tdd"
     ];
     targets.claude.enable = true;

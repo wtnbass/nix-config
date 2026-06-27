@@ -3,7 +3,7 @@
 {
   programs.fish = {
     enable = true;
-    interactiveShellInit =  ''
+    interactiveShellInit = ''
       set fish_greeting
 
       set -g hydro_color_pwd blue
@@ -47,11 +47,26 @@
       ghw = "cd (ghq root)/github.com/wtnbass";
     };
     plugins = [
-      { name = "fzf-fish";    src = pkgs.fishPlugins.fzf-fish.src; }
-      { name = "done";        src = pkgs.fishPlugins.done.src; }
-      { name = "hydro";       src = pkgs.fishPlugins.hydro.src; }
-      { name = "autopair";    src = pkgs.fishPlugins.autopair.src; }
-      { name = "sponge";      src = pkgs.fishPlugins.sponge.src; }
+      {
+        name = "fzf-fish";
+        src = pkgs.fishPlugins.fzf-fish.src;
+      }
+      {
+        name = "done";
+        src = pkgs.fishPlugins.done.src;
+      }
+      {
+        name = "hydro";
+        src = pkgs.fishPlugins.hydro.src;
+      }
+      {
+        name = "autopair";
+        src = pkgs.fishPlugins.autopair.src;
+      }
+      {
+        name = "sponge";
+        src = pkgs.fishPlugins.sponge.src;
+      }
     ];
     functions = {
       gcd = ''

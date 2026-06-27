@@ -33,12 +33,17 @@
       upgrade = true;
     };
 
+    brews = [
+      "mise"
+    ];
+
     casks = [
       "azookey"
       "ghostty"
       "cmux"
       "raycast"
       "codex-app"
+      "karabiner-elements"
       "zed"
     ];
 

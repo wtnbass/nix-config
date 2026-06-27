@@ -4,26 +4,29 @@
     EDITOR = "hx";
   };
 
-  home.packages = [
-    pkgs.bash-language-server
-    pkgs.docker-compose-language-service
-    pkgs.dockerfile-language-server
-    pkgs.gopls
-    pkgs.haskell-language-server
-    pkgs.lua-language-server
-    pkgs.markdown-oxide
-    pkgs.nixd
-    pkgs.nixfmt
-    pkgs.intelephense
-    pkgs.ruff
-    pkgs.rust-analyzer
-    pkgs.stylua
-    pkgs.tombi
-    pkgs.vscode-langservers-extracted
-    pkgs.vtsls
-    pkgs.yaml-language-server
-    pkgs.yamlfmt
-    pkgs.zls
+  home.packages = with pkgs; [
+    bash-language-server
+    docker-compose-language-service
+    dockerfile-language-server
+    gopls
+    haskell-language-server
+    jdt-language-server
+    lombok
+    google-java-format
+    lua-language-server
+    markdown-oxide
+    nixd
+    nixfmt
+    intelephense
+    ruff
+    rust-analyzer
+    stylua
+    tombi
+    vscode-langservers-extracted
+    vtsls
+    yaml-language-server
+    yamlfmt
+    zls
   ];
 
   xdg.configFile."helix/themes/kanagawa_transparent.toml".text = ''
@@ -131,6 +134,12 @@
         ret.b = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}";
         Z.Z = ":write-quit-all";
       };
+    };
+    languages.language-server.jdtls = {
+      command = "jdtls";
+      args = [
+        "--jvm-arg=-javaagent:${pkgs.lombok}/share/java/lombok.jar"
+      ];
     };
     languages.language-server.vtsls = {
       command = "vtsls";
@@ -246,6 +255,15 @@
         {
           name = "haskell";
           language-servers = [ "haskell-language-server" ];
+          auto-format = true;
+        }
+        {
+          name = "java";
+          language-servers = [ "jdtls" ];
+          formatter = {
+            command = "google-java-format";
+            args = [ "-" ];
+          };
           auto-format = true;
         }
         {
