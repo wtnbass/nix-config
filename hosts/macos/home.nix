@@ -3,7 +3,7 @@
 {
   imports = [
     ../../home/agents
-    ../../home/fish.nix
+    ../../home/zsh.nix
     ../../home/ghostty.nix
     ../../home/git.nix
     ../../home/helix
@@ -32,15 +32,5 @@
     "/opt/homebrew/bin"
     "/opt/homebrew/sbin"
   ];
-
-  programs.fish.interactiveShellInit = ''
-    if command -q podman
-        set socket (podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}' 2>/dev/null)
-
-        if test -n "$socket"
-            set -gx DOCKER_HOST "unix://$socket"
-        end
-    end
-  '';
 
 }

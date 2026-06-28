@@ -6,12 +6,14 @@
 
   system.primaryUser = user.username;
 
+  users.knownUsers = [ user.username ];
   users.users.${user.username} = {
+    uid = 501;
     name = user.username;
     home = user.home;
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
   };
-  programs.fish.enable = true;
+  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -20,7 +22,7 @@
   environment.systemPackages = with pkgs; [
     vim
   ];
-  environment.shells = [ pkgs.fish ];
+  environment.shells = [ pkgs.zsh ];
 
   # Homebrew management via nix-darwin
   homebrew = {

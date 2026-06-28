@@ -14,20 +14,15 @@
     yazi
   ];
 
-  programs.fzf = {
-    enable = true;
-    enableFishIntegration = true;
-  };
+  programs.fzf.enable = true;
 
   programs.zoxide = {
     enable = true;
-    enableFishIntegration = true;
     options = [ "--cmd cd" ];
   };
 
   programs.direnv = {
     enable = true;
-    enableFishIntegration = true;
     nix-direnv.enable = true;
   };
 }
