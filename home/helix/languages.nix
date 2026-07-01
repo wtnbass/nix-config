@@ -38,18 +38,32 @@ in
     };
     language =
       map
-        (name: {
+        ({ name, ext }: {
           inherit name;
           language-servers = [
             "vtsls"
             "tailwindcss-ls"
           ];
+          formatter = denoFmt ext [ ];
+          auto-format = true;
         })
         [
-          "javascript"
-          "jsx"
-          "typescript"
-          "tsx"
+          {
+            name = "javascript";
+            ext = "js";
+          }
+          {
+            name = "jsx";
+            ext = "jsx";
+          }
+          {
+            name = "typescript";
+            ext = "ts";
+          }
+          {
+            name = "tsx";
+            ext = "tsx";
+          }
         ]
       ++
         map
