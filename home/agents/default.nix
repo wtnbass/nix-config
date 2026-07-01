@@ -5,6 +5,7 @@
     llm-agents.claude-code
     llm-agents.codex
     llm-agents.pi
+    llm-agents.herdr
   ];
 
   # statusline は ~/.claude/settings.json の statusLine 設定からこのパスを参照している
@@ -12,6 +13,8 @@
     source = ./statusline-command.sh;
     executable = true;
   };
+
+  home.file.".config/herdr/config.toml".source = ./herdr-config.toml;
 
   programs.agent-skills = {
     enable = true;

@@ -27,14 +27,12 @@
         font_family = "UDEV Gothic NF";
       };
 
-      helix_mode = true;
+      helix_mode = false;
       vim_mode = false;
 
-      relative_line_numbers = true;
       soft_wrap = "editor_width";
       show_wrap_guides = false;
 
-      cursor_shape = "block";
       file_scan_exclusions = [
         "**/.git"
         "**/.direnv"

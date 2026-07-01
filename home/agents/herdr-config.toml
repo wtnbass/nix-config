@@ -1,0 +1,4 @@
+# herdr configuration
+
+[keys]
+prefix = "ctrl+s"

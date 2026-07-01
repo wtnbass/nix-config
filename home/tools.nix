@@ -12,6 +12,8 @@
     gh
     lazygit
     yazi
+    hunk
+    ghui
   ];
 
   programs.fzf.enable = true;

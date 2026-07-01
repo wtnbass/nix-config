@@ -36,6 +36,7 @@
       url = "github:GoogleChrome/modern-web-guidance";
       flake = false;
     };
+    hunk.url = "github:modem-dev/hunk";
     lazyvim = {
       url = "github:LazyVim/starter";
       flake = false;
@@ -50,6 +51,7 @@
       nix-darwin,
       rust-overlay,
       llm-agents,
+      hunk,
       agent-skills-nix,
       ...
     }:
@@ -67,6 +69,9 @@
       overlays = [
         rust-overlay.overlays.default
         llm-agents.overlays.default
+        (final: _prev: {
+          hunk = hunk.packages.${final.system}.default;
+        })
       ];
       mkExtraSpecialArgs = system: user: {
         inherit user inputs system;

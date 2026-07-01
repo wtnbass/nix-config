@@ -1,5 +1,4 @@
 UNAME := $(shell uname)
-SWITCH_ULIMIT ?= 65535
 CLEAN_KEEP_GENERATIONS ?= 3
 
 .PHONY: switch update clean setup-ssh-keys
@@ -8,14 +7,14 @@ CLEAN_KEEP_GENERATIONS ?= 3
 
 ifeq ($(UNAME), Darwin)
 switch:
-	ulimit -n $(SWITCH_ULIMIT) && sudo darwin-rebuild switch --flake .
+	sudo darwin-rebuild switch --flake .
 else
 switch:
-	ulimit -n $(SWITCH_ULIMIT) && sudo nixos-rebuild switch --flake .
+	sudo nixos-rebuild switch --flake .
 endif
 
 update:
-	ulimit -n $(SWITCH_ULIMIT) && nix flake update
+	nix flake update
 
 clean:
 	CLEAN_KEEP_GENERATIONS=$(CLEAN_KEEP_GENERATIONS) ./scripts/clean-nix-store.sh
