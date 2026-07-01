@@ -51,13 +51,10 @@
         gf = "git fetch -ap";
         gp = "git push";
         gpl = "git pull";
-        gsw = "git switch";
         lg = "lazygit";
-        t = "tmux";
-        ta = "tmux attach";
         c = "claude";
+        hd = "herdr";
         g = "gcd";
-        ghw = ''cd "$(ghq root)/github.com/wtnbass"'';
       };
     };
   };

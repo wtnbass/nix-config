@@ -1,4 +1,4 @@
 # herdr configuration
 
 [keys]
-prefix = "ctrl+s"
+prefix = "ctrl+;"
