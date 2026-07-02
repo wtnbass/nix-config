@@ -1,4 +1,9 @@
 # herdr configuration
 
 [keys]
-prefix = "ctrl+;"
+prefix = "alt+j"
+previous_workspace = "prefix+alt+h"
+next_workspace = "prefix+alt+l"
+
+[ui]
+prompt_new_tab_name = false
