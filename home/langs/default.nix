@@ -16,6 +16,7 @@
     vscode-langservers-extracted
     tailwindcss-language-server
     markdown-oxide
+    iwe
     yaml-language-server
     yamlfmt
     tombi

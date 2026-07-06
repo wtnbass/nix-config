@@ -36,6 +36,9 @@ in
       command = "tailwindcss-language-server";
       args = [ "--stdio" ];
     };
+    language-server.iwe = {
+      command = "iwes";
+    };
     language =
       map
         ({ name, ext }: {
@@ -109,7 +112,10 @@ in
       ++ [
         {
           name = "markdown";
-          language-servers = [ "markdown-oxide" ];
+          language-servers = [
+            "iwe"
+            "markdown-oxide"
+          ];
           formatter = denoFmt "md" [
             "--prose-wrap"
             "preserve"

@@ -12,9 +12,10 @@
     gh
     lazygit
     yazi
-    hunk
     ghui
     backlog-md
+    lumen
+    mdcat
   ];
 
   programs.fzf.enable = true;

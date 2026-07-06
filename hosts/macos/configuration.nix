@@ -18,6 +18,16 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # マニュアル生成 (darwin-manual/options.json) を無効化。
+  # Determinate Nix の lazy-trees と相性が悪く store path 警告が出るため。
+  documentation.enable = false;
+
+  # darwin-uninstaller は内部でデフォルト設定 (documentation 有効) の
+  # システムを評価するため、nixpkgs-unstable の nixos-render-docs との
+  # 非互換 (--toc-depth 削除) でビルドが失敗する。必要なら
+  # `nix run nix-darwin#darwin-uninstaller` で都度実行できる。
+  system.tools.darwin-uninstaller.enable = false;
+
   # System packages (installed system-wide)
   environment.systemPackages = with pkgs; [
     vim

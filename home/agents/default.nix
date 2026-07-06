@@ -8,6 +8,9 @@
     llm-agents.herdr
   ];
 
+  # 全プロジェクト共通の Claude Code 向け指示
+  home.file.".claude/CLAUDE.md".source = ./CLAUDE.md;
+
   # statusline は ~/.claude/settings.json の statusLine 設定からこのパスを参照している
   home.file.".claude/statusline-command.sh" = {
     source = ./statusline-command.sh;
