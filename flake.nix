@@ -37,6 +37,10 @@
       flake = false;
     };
     hunk.url = "github:modem-dev/hunk";
+    backlog-md = {
+      url = "github:MrLesk/Backlog.md";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     lazyvim = {
       url = "github:LazyVim/starter";
       flake = false;
@@ -52,6 +56,7 @@
       rust-overlay,
       llm-agents,
       hunk,
+      backlog-md,
       agent-skills-nix,
       ...
     }:
@@ -71,6 +76,9 @@
         llm-agents.overlays.default
         (final: _prev: {
           hunk = hunk.packages.${final.system}.default;
+        })
+        (final: _prev: {
+          backlog-md = backlog-md.packages.${final.system}.default;
         })
       ];
       mkExtraSpecialArgs = system: user: {

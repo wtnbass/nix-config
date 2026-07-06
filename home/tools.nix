@@ -14,6 +14,7 @@
     yazi
     hunk
     ghui
+    backlog-md
   ];
 
   programs.fzf.enable = true;
