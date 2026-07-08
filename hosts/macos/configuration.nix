@@ -11,8 +11,9 @@
     uid = 501;
     name = user.username;
     home = user.home;
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
+  programs.fish.enable = true;
   programs.zsh.enable = true;
 
   # Allow unfree packages
@@ -32,7 +33,10 @@
   environment.systemPackages = with pkgs; [
     vim
   ];
-  environment.shells = [ pkgs.zsh ];
+  environment.shells = [
+    pkgs.fish
+    pkgs.zsh
+  ];
 
   # Homebrew management via nix-darwin
   homebrew = {

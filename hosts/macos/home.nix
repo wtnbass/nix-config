@@ -3,6 +3,7 @@
 {
   imports = [
     ../../home/agents
+    ../../home/fish.nix
     ../../home/zsh.nix
     ../../home/ghostty.nix
     ../../home/git.nix
