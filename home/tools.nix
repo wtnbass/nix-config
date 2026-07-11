@@ -16,6 +16,7 @@
     backlog-md
     lumen
     mdcat
+    glow
   ];
 
   programs.fzf.enable = true;
