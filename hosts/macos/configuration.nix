@@ -59,7 +59,6 @@
       "karabiner-elements"
       "raycast"
       "ghostty"
-      "codex-app"
       "zed"
     ];
 
