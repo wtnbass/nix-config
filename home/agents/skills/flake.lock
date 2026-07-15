@@ -72,6 +72,22 @@
         "type": "github"
       }
     },
+    "ketch": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784088662,
+        "narHash": "sha256-QXweqzLHieqXh1MX13SpWDV8Bd5usMyj4yqCh35BoW4=",
+        "owner": "1broseidon",
+        "repo": "ketch",
+        "rev": "2348e01b292f3627d54cba0385f35ccf52b0025c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "1broseidon",
+        "repo": "ketch",
+        "type": "github"
+      }
+    },
     "mattpocock-skills": {
       "flake": false,
       "locked": {
@@ -109,6 +125,7 @@
         "agent-skills-nix": "agent-skills-nix",
         "anthropic-skills": "anthropic-skills",
         "google-modern-web-guidance": "google-modern-web-guidance",
+        "ketch": "ketch",
         "mattpocock-skills": "mattpocock-skills"
       }
     }

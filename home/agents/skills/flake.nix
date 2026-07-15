@@ -15,6 +15,10 @@
       url = "github:GoogleChrome/modern-web-guidance";
       flake = false;
     };
+    ketch = {
+      url = "github:1broseidon/ketch";
+      flake = false;
+    };
   };
 
   outputs =

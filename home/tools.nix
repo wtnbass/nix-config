@@ -17,6 +17,7 @@
     lumen
     mdcat
     glow
+    ketch
   ];
 
   programs.fzf.enable = true;
