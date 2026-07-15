@@ -1,0 +1,118 @@
+{
+  "nodes": {
+    "agent-skills-nix": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1783839654,
+        "narHash": "sha256-rn5DkeQ9PBaJTZl9juBtPnVawyN4B83tyz1VpiinQFo=",
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "rev": "8326df98cf494dc515db99affa9ea9d2bd6666b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "type": "github"
+      }
+    },
+    "anthropic-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782929483,
+        "narHash": "sha256-U7Nt1xrFOSOEm4vuWmy4pVsEyvv+Hj4sv8yXOofmwAw=",
+        "owner": "anthropics",
+        "repo": "skills",
+        "rev": "9d2f1ae187231d8199c64b5b762e1bdf2244733d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anthropics",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
+    "google-modern-web-guidance": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784043399,
+        "narHash": "sha256-639KC1KvqbDawgB3tONu/q+/qTE89kHTX/7U2H8i1Ss=",
+        "owner": "GoogleChrome",
+        "repo": "modern-web-guidance",
+        "rev": "c54db496e0d2137a90d197c9c01ee9a290c1b2cf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "GoogleChrome",
+        "repo": "modern-web-guidance",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "agent-skills-nix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783222121,
+        "narHash": "sha256-E/ElL373TO8lQ2aMvYyzN+k4xkVaUGoRqoa8AtM71tI=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "a1645f40777620c4bd2b6d854b290c2fc354a266",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "mattpocock-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784053942,
+        "narHash": "sha256-uPkA26EPyB5uHsZ9uL/xFFNcuMWkPdq6srmIrazxlNA=",
+        "owner": "mattpocock",
+        "repo": "skills",
+        "rev": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattpocock",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1783224372,
+        "narHash": "sha256-8i/87eeoqiGE4yOTjwSA3Eh/ziJRQEmd/unYU+K27sk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "agent-skills-nix": "agent-skills-nix",
+        "anthropic-skills": "anthropic-skills",
+        "google-modern-web-guidance": "google-modern-web-guidance",
+        "mattpocock-skills": "mattpocock-skills"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

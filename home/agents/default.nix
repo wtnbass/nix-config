@@ -56,44 +56,6 @@ in
 
   home.file.".config/herdr/config.toml".source = ./herdr-config.toml;
 
-  programs.agent-skills = {
-    enable = true;
-    sources.anthropic = {
-      input = "anthropic-skills";
-      subdir = "skills";
-    };
-    sources.mattpocock-skills-engineering = {
-      input = "mattpocock-skills";
-      subdir = "skills/engineering";
-    };
-    sources.mattpocock-skills-productivity = {
-      input = "mattpocock-skills";
-      subdir = "skills/productivity";
-    };
-    sources.google-modern-web-guidance = {
-      input = "google-modern-web-guidance";
-      subdir = "skills";
-    };
-    sources.local = {
-      path = ./skills;
-    };
-    skills.enable = [
-      "frontend-design"
-      "skill-creator"
-      "git-commit"
-      "nix-run"
-      "modern-web-guidance"
-      "grilling"
-      "handoff"
-      "grill-with-docs"
-      "japanese-tech-writing"
-      "tdd"
-    ];
-    targets.claude.enable = true;
-    targets.codex.enable = true;
-    targets.pi = {
-      enable = true;
-      dest = "\${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}/skills";
-    };
-  };
+  # agent skill の設定は ./skills (sub flake) 側にある。ルート flake が
+  # path input として取り込み、homeManagerModules.default を適用している。
 }

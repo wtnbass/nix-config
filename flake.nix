@@ -23,19 +23,7 @@
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
     llm-agents.url = "github:numtide/llm-agents.nix";
-    agent-skills-nix.url = "github:Kyure-A/agent-skills-nix";
-    anthropic-skills = {
-      url = "github:anthropics/skills";
-      flake = false;
-    };
-    mattpocock-skills = {
-      url = "github:mattpocock/skills";
-      flake = false;
-    };
-    google-modern-web-guidance = {
-      url = "github:GoogleChrome/modern-web-guidance";
-      flake = false;
-    };
+    agent-skills.url = "path:./home/agents/skills";
     backlog-md = {
       url = "github:MrLesk/Backlog.md";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,7 +43,7 @@
       rust-overlay,
       llm-agents,
       backlog-md,
-      agent-skills-nix,
+      agent-skills,
       ...
     }:
     let
@@ -71,7 +59,7 @@
       };
       overlays = [
         rust-overlay.overlays.default
-        llm-agents.overlays.default
+        llm-agents.overlays.shared-nixpkgs
         (final: _prev: {
           backlog-md = backlog-md.packages.${final.stdenv.hostPlatform.system}.default;
         })
@@ -102,7 +90,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = mkExtraSpecialArgs "x86_64-linux" nixosUser;
-              home-manager.sharedModules = [ agent-skills-nix.homeManagerModules.default ];
+              home-manager.sharedModules = [ agent-skills.homeManagerModules.default ];
               home-manager.users.${nixosUser.username} = {
                 imports = [ ./hosts/wsl/home.nix ];
               };
@@ -127,7 +115,7 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
               home-manager.extraSpecialArgs = mkExtraSpecialArgs "aarch64-darwin" darwinUser;
-              home-manager.sharedModules = [ agent-skills-nix.homeManagerModules.default ];
+              home-manager.sharedModules = [ agent-skills.homeManagerModules.default ];
               home-manager.users.${darwinUser.username} = {
                 imports = [ ./hosts/macos/home.nix ];
               };

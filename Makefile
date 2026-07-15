@@ -14,6 +14,7 @@ switch:
 endif
 
 update:
+	nix flake update --flake ./home/agents/skills
 	nix flake update
 
 clean:
