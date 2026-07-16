@@ -14,8 +14,10 @@ switch:
 endif
 
 update:
-	nix flake update --flake ./home/agents/skills
 	nix flake update
+
+update-skill:
+	nix flake update --flake ./home/agents/skills
 
 clean:
 	CLEAN_KEEP_GENERATIONS=$(CLEAN_KEEP_GENERATIONS) ./scripts/clean-nix-store.sh

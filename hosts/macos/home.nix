@@ -8,6 +8,7 @@
     ../../home/ghostty.nix
     ../../home/git.nix
     ../../home/helix
+    ../../home/herdr.nix
     ../../home/karabiner.nix
     ../../home/langs
     ../../home/ssh.nix

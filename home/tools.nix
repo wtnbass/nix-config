@@ -15,6 +15,7 @@
     ghui
     backlog-md
     lumen
+    hunk
     mdcat
     glow
     ketch

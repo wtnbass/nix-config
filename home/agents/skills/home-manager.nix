@@ -39,12 +39,13 @@ inputs: {
       "git-commit"
       "nix-run"
       "modern-web-guidance"
-      "grilling"
-      "handoff"
-      "grill-with-docs"
       "japanese-tech-writing"
       "cognitive-rhythm-writing"
-      "tdd"
+      "handoff"
+      "grill-me"
+      "grill-with-docs"
+      "grilling"
+      "wayfinder"
       "ketch"
     ];
     targets.claude.enable = true;

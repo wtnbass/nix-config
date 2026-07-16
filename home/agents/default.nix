@@ -9,19 +9,12 @@ let
     "npm:pi-agent-browser-native"
   ];
 
-  # herdr のプラグイン (owner/repo)。herdr が ~/.config/herdr/plugins/ 配下に
-  # インストールして管理するため symlink 管理はできない。
-  # activation で未導入のものだけ herdr plugin install する。
-  herdrPlugins = [
-    "smarzban/herdr-file-viewer"
-  ];
 in
 {
   home.packages = with pkgs; [
     llm-agents.claude-code
     llm-agents.codex
     llm-agents.pi
-    llm-agents.herdr
     agent-browser # pi-agent-browser-native が PATH に要求する CLI
   ];
 
@@ -35,16 +28,6 @@ in
     done
   '';
 
-  home.activation.herdrInstallPlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    for plugin in ${lib.escapeShellArgs herdrPlugins}; do
-      repo="''${plugin#*/}"
-      if ! ls "$HOME/.config/herdr/plugins/github/$repo-"*/herdr-plugin.toml >/dev/null 2>&1; then
-        run ${pkgs.llm-agents.herdr}/bin/herdr plugin install "$plugin" --yes \
-          || verboseEcho "herdr plugin install $plugin failed: re-run 'herdr plugin install $plugin' manually"
-      fi
-    done
-  '';
-
   # 全プロジェクト共通の Claude Code 向け指示
   home.file.".claude/CLAUDE.md".source = ./CLAUDE.md;
 
@@ -53,9 +36,4 @@ in
     source = ./statusline-command.sh;
     executable = true;
   };
-
-  home.file.".config/herdr/config.toml".source = ./herdr-config.toml;
-
-  # agent skill の設定は ./skills (sub flake) 側にある。ルート flake が
-  # path input として取り込み、homeManagerModules.default を適用している。
 }
