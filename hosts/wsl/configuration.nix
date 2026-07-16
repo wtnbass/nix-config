@@ -34,6 +34,8 @@
     vim
     git
     docker-compose
+    mise
+    openssh
   ];
 
   virtualisation.docker.enable = true;

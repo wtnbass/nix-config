@@ -19,6 +19,14 @@
       url = "github:1broseidon/ketch";
       flake = false;
     };
+    cognitive-rhythm-writing = {
+      url = "git+https://gist.github.com/k16shikano/eb2929f13ed19c97188393d297be8432.git";
+      flake = false;
+    };
+    japanese-tech-writing = {
+      url = "git+https://gist.github.com/k16shikano/fd287c3133457c4fd8f5601d34aa817d.git";
+      flake = false;
+    };
   };
 
   outputs =

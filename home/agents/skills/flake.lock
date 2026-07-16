@@ -35,6 +35,22 @@
         "type": "github"
       }
     },
+    "cognitive-rhythm-writing": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783600534,
+        "narHash": "sha256-Zo3iVnTvVG6IfU9vBf4Zv/bEcKmNKnI2IY1D0uvzkNM=",
+        "ref": "refs/heads/main",
+        "rev": "a3b1e26beced71d582e13314fb6f5b179b023c76",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://gist.github.com/k16shikano/eb2929f13ed19c97188393d297be8432.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gist.github.com/k16shikano/eb2929f13ed19c97188393d297be8432.git"
+      }
+    },
     "google-modern-web-guidance": {
       "flake": false,
       "locked": {
@@ -70,6 +86,22 @@
         "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
+      }
+    },
+    "japanese-tech-writing": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783598469,
+        "narHash": "sha256-S8VqzkYfDsjIwuLPgs8TM/E/aLlFJbEgScrpc0qEiq8=",
+        "ref": "refs/heads/main",
+        "rev": "209db7d6d19bc4727139844c0e8d786542e9ff68",
+        "revCount": 5,
+        "type": "git",
+        "url": "https://gist.github.com/k16shikano/fd287c3133457c4fd8f5601d34aa817d.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gist.github.com/k16shikano/fd287c3133457c4fd8f5601d34aa817d.git"
       }
     },
     "ketch": {
@@ -124,7 +156,9 @@
       "inputs": {
         "agent-skills-nix": "agent-skills-nix",
         "anthropic-skills": "anthropic-skills",
+        "cognitive-rhythm-writing": "cognitive-rhythm-writing",
         "google-modern-web-guidance": "google-modern-web-guidance",
+        "japanese-tech-writing": "japanese-tech-writing",
         "ketch": "ketch",
         "mattpocock-skills": "mattpocock-skills"
       }

@@ -23,6 +23,12 @@ inputs: {
       path = inputs.ketch;
       subdir = "skills";
     };
+    sources.cognitive-rhythm-writing = {
+      path = inputs.cognitive-rhythm-writing;
+    };
+    sources.japanese-tech-writing = {
+      path = inputs.japanese-tech-writing;
+    };
     # この flake 直下の SKILL.md を持つディレクトリ群 (git-commit など)
     sources.local = {
       path = ./.;
@@ -37,6 +43,7 @@ inputs: {
       "handoff"
       "grill-with-docs"
       "japanese-tech-writing"
+      "cognitive-rhythm-writing"
       "tdd"
       "ketch"
     ];
